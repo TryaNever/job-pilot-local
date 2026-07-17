@@ -1,0 +1,66 @@
+# =========================
+# Python
+# =========================
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# =========================
+# Packages
+# =========================
+
+# pip
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# =========================
+# Environment variables
+# =========================
+
+.env
+.env.*
+!.env.example
+
+# =========================
+# FastAPI / Uvicorn
+# =========================
+
+*.log
+
+# =========================
+# Tests
+# =========================
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# IDE
+# =========================
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# =========================
+# OS
+# =========================
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
