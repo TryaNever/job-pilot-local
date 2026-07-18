@@ -9,8 +9,8 @@ prettier:
 
 lint-prettier: lint lint-fix prettier
 
-dev-start:
-	docker-compose up -d --build
+start:
+	./start.ps1
 
 clear:
 	docker compose down -v
