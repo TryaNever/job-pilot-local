@@ -20,3 +20,23 @@ services:
             - .next/
         - action: rebuild
           path: package.json
+
+  fastapi-dev:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    image: fastapi-sample:dev
+    container_name: fastapi-sample-dev
+    ports:
+      - "8000:8000"
+    environment:
+      - WATCHPACK_POLLING=true
+      - CHOKIDAR_USEPOLLING=true
+    develop:
+      watch:
+        - action: sync
+          path: ./backend
+          target: /app
+          ignore:
+            - __pycache__/
+            - "*.pyc"
