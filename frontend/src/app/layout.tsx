@@ -31,7 +31,7 @@ const navigationItems =
   "rounded-full bg-purple-200 whitespace-nowrap px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground";
 const navigationLinks = [
   { href: "/", label: "Home" },
-  { href: "/profile", label: "Profile" },
+  { href: "/profil", label: "Profile" },
   { href: "/settings", label: "Settings" },
 ];
 
