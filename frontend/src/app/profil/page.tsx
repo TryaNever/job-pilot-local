@@ -7,52 +7,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Trash2, Save, Sparkles, Download, Upload } from "lucide-react";
-import path from "path";
-import fs from "fs/promises";
+import ImportFile from "@/components/common/ImportFile";
+import { Certification, Experience, Formation, Langue, Profile } from "@/types/ProfileType";
 
-interface Experience {
-  entreprise: string;
-  poste: string;
-  debut: string;
-  fin: string;
-  missions: string;
-}
 
-interface Formation {
-  ecole: string;
-  diplome: string;
-  annee: string;
-  description: string;
-}
-
-interface Langue {
-  nom: string;
-  niveau: string;
-}
-
-interface Certification {
-  nom: string;
-  organisme: string;
-}
-
-interface Profile {
-  nom: string;
-  prenom: string;
-  age: string;
-  localisation: string;
-  email: string;
-  telephone: string;
-  linkedin: string;
-  github: string;
-  portfolio: string;
-  poste: string;
-  description: string;
-  skills: string[];
-  experiences: Experience[];
-  formations: Formation[];
-  langues: Langue[];
-  certifications: Certification[];
-}
 
 export default function ProfilePage() {
   const defaultProfile = {
@@ -82,6 +40,11 @@ export default function ProfilePage() {
       setProfile(JSON.parse(savedProfile));
     }
   }, []);
+
+  useEffect(() => {
+    console.log(profile);
+    
+  },[profile])
 
   const [skill, setSkill] = useState("");
 
@@ -242,10 +205,7 @@ export default function ProfilePage() {
               <Download className="mr-2 h-4 w-4" />
               Export
             </Button>
-            <Button onClick={() => saveProfile(profile)}>
-              <Upload className="mr-2 h-4 w-4" />
-              Import
-            </Button>
+            <ImportFile setProfil={setProfile}></ImportFile>
           </div>
         </div>
 
