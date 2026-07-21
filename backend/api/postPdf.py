@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File,HTTPException
 import os
 import shutil
 
@@ -13,11 +13,28 @@ os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 @router.post("/upload/cv/main")
 async def postPdfCvMain(file: UploadFile = File(...)):
-    file_location = os.path.join(UPLOAD_DIR, "cv.pdf")
-    with open(file_location, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+    try:
+        if file.content_type != "application/pdf":
+            raise HTTPException(
+                status_code=400,
+                detail="Only PDF files are allowed"
+            )
+        
+        file_location = os.path.join(UPLOAD_DIR, "cv.pdf")
 
-    return {
-        "message": "file upload",
-        "filename": "cv.pdf"
-    }
+        with open(file_location, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        return {
+            "message": "file upload",
+            "filename": "cv.pdf"
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
+
+    finally:
+        await file.close()
