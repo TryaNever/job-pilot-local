@@ -24,6 +24,14 @@
         "documentation": {}
     },
     {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "FastAPI",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -122,6 +130,14 @@
         "documentation": {}
     },
     {
+        "label": "CORSMiddleware",
+        "importPath": "fastapi.middleware.cors",
+        "description": "fastapi.middleware.cors",
+        "isExtraImport": true,
+        "detail": "fastapi.middleware.cors",
+        "documentation": {}
+    },
+    {
         "label": "json",
         "kind": 6,
         "isExtraImport": true,
@@ -135,7 +151,7 @@
         "kind": 5,
         "importPath": "backend.api.postPdf",
         "description": "backend.api.postPdf",
-        "peekOfCode": "router = APIRouter()\nBASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    file_location = os.path.join(UPLOAD_DIR, \"cv.pdf\")\n    with open(file_location, \"wb\") as buffer:",
+        "peekOfCode": "router = APIRouter()\nBASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":",
         "detail": "backend.api.postPdf",
         "documentation": {}
     },
@@ -144,7 +160,7 @@
         "kind": 5,
         "importPath": "backend.api.postPdf",
         "description": "backend.api.postPdf",
-        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    file_location = os.path.join(UPLOAD_DIR, \"cv.pdf\")\n    with open(file_location, \"wb\") as buffer:\n        shutil.copyfileobj(file.file, buffer)",
+        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":\n            raise HTTPException(",
         "detail": "backend.api.postPdf",
         "documentation": {}
     },
@@ -153,7 +169,7 @@
         "kind": 5,
         "importPath": "backend.api.postPdf",
         "description": "backend.api.postPdf",
-        "peekOfCode": "UPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    file_location = os.path.join(UPLOAD_DIR, \"cv.pdf\")\n    with open(file_location, \"wb\") as buffer:\n        shutil.copyfileobj(file.file, buffer)\n    return {",
+        "peekOfCode": "UPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":\n            raise HTTPException(\n                status_code=400,",
         "detail": "backend.api.postPdf",
         "documentation": {}
     },
@@ -216,7 +232,7 @@
         "kind": 5,
         "importPath": "backend.main",
         "description": "backend.main",
-        "peekOfCode": "app = FastAPI(lifespan=lifespan)\napp.include_router(pdf_router)\n@app.get(\"/\")\ndef root():\n    return {\"message\": \"API OK\"}",
+        "peekOfCode": "app = FastAPI(lifespan=lifespan)\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\n        \"http://localhost:3000\",\n    ],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)",
         "detail": "backend.main",
         "documentation": {}
     },
