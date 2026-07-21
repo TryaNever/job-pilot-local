@@ -42,9 +42,6 @@ services:
             - "*.pyc"
     depends_on:
       - mysql
-    networks:
-      - ollama-docker
-
   mysql:
     image: mysql:8
     container_name: mysql-dev
@@ -55,8 +52,6 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
       - "3306:3306"
-    networks:
-      - ollama-docker
 
   phpmyadmin:
     image: phpmyadmin:latest
