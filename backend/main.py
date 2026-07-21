@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 from core.database import create_db_and_tables
 import models  # charge tous les modèles
+from api.postPdf import postPdfCvMain
 
 
 @asynccontextmanager
