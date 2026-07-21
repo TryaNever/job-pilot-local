@@ -19,7 +19,7 @@ export default function AddJobs() {
       Ajouter Une Offre
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[700px]">
+      <DialogContent className="sm:max-w-175">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
             Ajouter une candidature
