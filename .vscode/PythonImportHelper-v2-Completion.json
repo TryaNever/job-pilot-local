@@ -114,16 +114,7 @@
         "documentation": {}
     },
     {
-        "label": "models",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "models",
-        "description": "models",
-        "detail": "models",
-        "documentation": {}
-    },
-    {
-        "label": "postPdfCvMain",
+        "label": "router",
         "importPath": "api.postPdf",
         "description": "api.postPdf",
         "isExtraImport": true,
@@ -144,7 +135,16 @@
         "kind": 5,
         "importPath": "backend.api.postPdf",
         "description": "backend.api.postPdf",
-        "peekOfCode": "router = APIRouter()\nUPLOAD_DIR = \"../../frontend/public/documents/cv\"\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File()) :\n    file_location = f\"{UPLOAD_DIR}/{\"cv.pdf\"}\"\n    with open(file_location, \"wb\") as buffer:\n        shutil.copyfileobj(file.file, buffer)\n    return {\n        \"message\": \"file upload\"",
+        "peekOfCode": "router = APIRouter()\nBASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    file_location = os.path.join(UPLOAD_DIR, \"cv.pdf\")\n    with open(file_location, \"wb\") as buffer:",
+        "detail": "backend.api.postPdf",
+        "documentation": {}
+    },
+    {
+        "label": "BASE_DIR",
+        "kind": 5,
+        "importPath": "backend.api.postPdf",
+        "description": "backend.api.postPdf",
+        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    file_location = os.path.join(UPLOAD_DIR, \"cv.pdf\")\n    with open(file_location, \"wb\") as buffer:\n        shutil.copyfileobj(file.file, buffer)",
         "detail": "backend.api.postPdf",
         "documentation": {}
     },
@@ -153,7 +153,7 @@
         "kind": 5,
         "importPath": "backend.api.postPdf",
         "description": "backend.api.postPdf",
-        "peekOfCode": "UPLOAD_DIR = \"../../frontend/public/documents/cv\"\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File()) :\n    file_location = f\"{UPLOAD_DIR}/{\"cv.pdf\"}\"\n    with open(file_location, \"wb\") as buffer:\n        shutil.copyfileobj(file.file, buffer)\n    return {\n        \"message\": \"file upload\"\n    }",
+        "peekOfCode": "UPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    file_location = os.path.join(UPLOAD_DIR, \"cv.pdf\")\n    with open(file_location, \"wb\") as buffer:\n        shutil.copyfileobj(file.file, buffer)\n    return {",
         "detail": "backend.api.postPdf",
         "documentation": {}
     },
@@ -216,7 +216,7 @@
         "kind": 5,
         "importPath": "backend.main",
         "description": "backend.main",
-        "peekOfCode": "app = FastAPI(lifespan=lifespan)\n@app.get(\"/\")\ndef root():\n    return {\"message\": \"API OK\"}",
+        "peekOfCode": "app = FastAPI(lifespan=lifespan)\napp.include_router(pdf_router)\n@app.get(\"/\")\ndef root():\n    return {\"message\": \"API OK\"}",
         "detail": "backend.main",
         "documentation": {}
     },
