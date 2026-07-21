@@ -1,23 +1,19 @@
 from contextlib import asynccontextmanager
-
 from fastapi import FastAPI
 
 from core.database import create_db_and_tables
-import models  # charge tous les modèles
+from api.postPdf import router as pdf_router
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Avant que l'application accepte les requêtes
     create_db_and_tables()
-
     yield
-
-    # Nettoyage à l'arrêt si besoin
-    pass
 
 
 app = FastAPI(lifespan=lifespan)
+
+app.include_router(pdf_router)
 
 
 @app.get("/")

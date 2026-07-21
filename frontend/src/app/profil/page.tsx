@@ -8,9 +8,14 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Trash2, Save, Sparkles, Download, Upload } from "lucide-react";
 import ImportFile from "@/components/common/ImportFile";
-import { Certification, Experience, Formation, Langue, Profile } from "@/types/ProfileType";
-
-
+import {
+  Certification,
+  Experience,
+  Formation,
+  Langue,
+  Profile,
+} from "@/types/ProfileType";
+import ImportPdf from "@/components/common/ImportPdf";
 
 export default function ProfilePage() {
   const defaultProfile = {
@@ -43,8 +48,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     console.log(profile);
-    
-  },[profile])
+  }, [profile]);
 
   const [skill, setSkill] = useState("");
 
@@ -514,23 +518,20 @@ export default function ProfilePage() {
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-3">CV</h3>
               <iframe
-                src="/documents/cv.pdf"
+                src="/documents/cv/cv.pdf"
                 className="h-[400px] w-full border rounded"
               />
-              <Button className="mt-4 w-full">
-                <Sparkles className="mr-2 h-4 w-4" />
-                Regénérer avec IA
-              </Button>
+              <ImportPdf />
             </div>
 
             <div className="border rounded-lg p-4">
               <h3 className="font-semibold mb-3">Lettre de motivation</h3>
               <iframe
-                src="/documents/lettre-motivation.pdf"
-                className="h-[400px] w-full border rounded"
+                src="/documents/lettre-motivation/lettre-motivation.pdf"
+                className="h-100 w-full border rounded"
               />
               <Button className="mt-4 w-full">
-                <Sparkles className="mr-2 h-4 w-4" />
+                <Sparkles className="mr-2z h-4 w-4" />
                 Créer une lettre
               </Button>
             </div>
