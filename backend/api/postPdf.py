@@ -6,7 +6,7 @@ router = APIRouter()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 UPLOAD_DIR = os.path.abspath(
-    os.path.join(BASE_DIR, "../frontend/public/documents/cv")
+    os.path.join(BASE_DIR, "./frontend/public/documents/cv")
 )
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
