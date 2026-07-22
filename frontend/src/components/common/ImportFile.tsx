@@ -39,8 +39,6 @@ export default function ImportFile({
       try {
         const text = reader.result as string;
         const jsonData = JSON.parse(text) as Profile;
-        // handle jsonData as needed
-        console.log(jsonData);
         setProfil(jsonData);
       } catch (e) {
         console.error("Failed to parse JSON file", e);
