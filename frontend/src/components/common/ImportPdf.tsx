@@ -18,7 +18,7 @@ import { apiFetch } from "@/utils/fetch";
 
 type textButton = {
   textButton?: ReactNode;
-  folder?: string;
+  target?: string;
 };
 
 type jsonBackResponse = {
@@ -32,7 +32,7 @@ export default function ImportPdf({
       Import
     </>
   ),
-  folder = "cv",
+  target = "cv",
 }: textButton) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -51,7 +51,7 @@ export default function ImportPdf({
 
     formData.append("file", file);
 
-    return apiFetch(`/upload/${folder}/main`, {
+    return apiFetch(`/upload/${target}/main`, {
       method: "POST",
       body: formData,
     });
