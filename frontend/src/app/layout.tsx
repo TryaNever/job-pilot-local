@@ -4,11 +4,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
