@@ -9,8 +9,9 @@ const nextConfig: NextConfig = {
   webpack(config, { dev }) {
     if (dev) {
       config.watchOptions = {
-        poll: 100,
-        aggregateTimeout: 100
+        poll: 500,
+        aggregateTimeout: 100,
+        ignored: /node_modules/,
       };
     }
     return config;
