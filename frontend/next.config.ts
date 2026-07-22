@@ -6,6 +6,16 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  webpack(config, { dev }) {
+    if (dev) {
+      config.watchOptions = {
+        poll: 100,
+        aggregateTimeout: 100
+      };
+    }
+    return config;
+  },
 };
+
 
 export default nextConfig;

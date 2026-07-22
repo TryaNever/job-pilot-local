@@ -10,10 +10,10 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-      - /app/.next
     environment:
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
+      - NEXT_WEBPACK_USEPOLLING=true
       - NEXT_TELEMETRY_DISABLED=1
   fastapi-dev:
     build:
