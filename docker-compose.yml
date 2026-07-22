@@ -8,11 +8,13 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend:/app
+      - ./frontend:/app:cached
       - /app/node_modules
     environment:
       - WATCHPACK_POLLING=true
+      - WATCHPACK_POLLING_INTERVAL=1000
       - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=1000
       - NEXT_WEBPACK_USEPOLLING=true
       - NEXT_TELEMETRY_DISABLED=1
   fastapi-dev:

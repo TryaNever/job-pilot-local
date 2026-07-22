@@ -151,7 +151,7 @@
         "kind": 5,
         "importPath": "backend.api.postPdf",
         "description": "backend.api.postPdf",
-        "peekOfCode": "router = APIRouter()\nBASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":",
+        "peekOfCode": "router = APIRouter()\nBASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"./frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":",
         "detail": "backend.api.postPdf",
         "documentation": {}
     },
@@ -160,7 +160,7 @@
         "kind": 5,
         "importPath": "backend.api.postPdf",
         "description": "backend.api.postPdf",
-        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":\n            raise HTTPException(",
+        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"./frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":\n            raise HTTPException(",
         "detail": "backend.api.postPdf",
         "documentation": {}
     },
@@ -169,7 +169,7 @@
         "kind": 5,
         "importPath": "backend.api.postPdf",
         "description": "backend.api.postPdf",
-        "peekOfCode": "UPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"../frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":\n            raise HTTPException(\n                status_code=400,",
+        "peekOfCode": "UPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"./frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":\n            raise HTTPException(\n                status_code=400,",
         "detail": "backend.api.postPdf",
         "documentation": {}
     },
