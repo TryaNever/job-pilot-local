@@ -26,6 +26,9 @@ services:
     environment:
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend/public/documents:/app/frontend/public/documents
+
     develop:
       watch:
         - action: sync
