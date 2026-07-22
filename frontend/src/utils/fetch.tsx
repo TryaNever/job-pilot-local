@@ -1,10 +1,11 @@
-const API_URL = process.env.API_URL
+const API_URL_BACK = process.env.NEXT_PUBLIC_API_URL_BACK || "http://localhost:8000";
 
 export async function apiFetch(
   endpoint: string,
   options?: RequestInit
 ) {
-  const response = await fetch(`${API_URL}${endpoint}`, {
+  const url = `${API_URL_BACK}${endpoint}`;
+  const response = await fetch(url, {
     ...options,
   });
 
@@ -16,7 +17,6 @@ export async function apiFetch(
       error?.message || "Une erreur est survenue"
     );
   }
-
 
   return response.json();
 }

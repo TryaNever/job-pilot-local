@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Field, FieldDescription, FieldLabel } from "../ui/field";
 import { ReactNode, useRef } from "react";
-import { Upload } from "lucide-react";
+import { Download } from "lucide-react";
 import { apiFetch } from "@/utils/fetch";
 
 type textButton = {
@@ -28,8 +28,8 @@ type jsonBackResponse = {
 export default function ImportPdf({
   textButton = (
     <>
-      <Upload className="mr-2 h-4 w-4" />
-      Export
+      <Download className="mr-2 h-4 w-4" />
+      Import
     </>
   ),
   folder = "cv",
@@ -58,27 +58,27 @@ export default function ImportPdf({
   }
   return (
     <Dialog>
-      <DialogTrigger render={<Button className="text-base" />}>
+      <DialogTrigger render={<Button className="text-base w-full py-2" />}>
         {textButton}
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-175">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
-            Mettre a jour votre profile
+            Mettre a jour votre CV
           </DialogTitle>
         </DialogHeader>
 
         <form className="space-y-6" onSubmit={importJson}>
           <div className="space-y-3">
             <Label htmlFor="url" className="text-lg font-medium">
-              Vos données en json que vous avec export
+              Import ton CV dans l&apos;app en pdf
             </Label>
 
             <Field>
-              <FieldLabel htmlFor="picture">.json file</FieldLabel>
+              <FieldLabel htmlFor="picture">.pdf file</FieldLabel>
               <Input id="json" type="file" accept=".pdf" ref={fileInputRef} />
-              <FieldDescription>Select a file.json to upload.</FieldDescription>
+              <FieldDescription>Select a file.pdf to upload.</FieldDescription>
             </Field>
           </div>
 

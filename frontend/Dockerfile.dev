@@ -1,24 +1,17 @@
-# ============================================
-# Development Dockerfile for Next.js
-# ============================================
-ARG NODE_VERSION=20-alpine
-
-FROM node:${NODE_VERSION} AS dev
+FROM node:20-alpine
 
 WORKDIR /app
 
-COPY package*.json  ./
+COPY package*.json ./
 
-RUN npm ci 
+RUN npm ci
 
 COPY . .
 
+ENV NODE_ENV=development
 ENV WATCHPACK_POLLING=true
-ENV HOSTNAME="0.0.0.0"
-ENV API_URL="http://localhost:8000/"
-
-RUN chown -R node:node /app
-USER node
+ENV CHOKIDAR_USEPOLLING=true
+ENV NEXT_WEBPACK_USEPOLLING=true
 
 EXPOSE 3000
 

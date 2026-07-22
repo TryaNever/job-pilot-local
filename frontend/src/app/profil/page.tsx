@@ -46,10 +46,6 @@ export default function ProfilePage() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log(profile);
-  }, [profile]);
-
   const [skill, setSkill] = useState("");
 
   function updateField(key: keyof Profile, value: string) {
@@ -515,13 +511,13 @@ export default function ProfilePage() {
             <CardTitle>Documents générés</CardTitle>
           </CardHeader>
           <CardContent className="grid md:grid-cols-2 gap-6">
-            <div className="border rounded-lg p-4">
+            <div className="border rounded-lg p-4 flex flex-col gap-2 px-5">
               <h3 className="font-semibold mb-3">CV</h3>
               <iframe
                 src="/documents/cv/cv.pdf"
-                className="h-[400px] w-full border rounded"
+                className="h-100 w-full border rounded"
               />
-              <ImportPdf />
+              <ImportPdf/>
             </div>
 
             <div className="border rounded-lg p-4">

@@ -7,20 +7,16 @@ services:
     container_name: nextjs-sample-dev
     ports:
       - "3000:3000"
+    volumes:
+      - ./frontend:/app:cached
+      - /app/node_modules
     environment:
       - WATCHPACK_POLLING=true
+      - WATCHPACK_POLLING_INTERVAL=1000
       - CHOKIDAR_USEPOLLING=true
-    develop:
-      watch:
-        - action: sync
-          path: ./frontend
-          target: /src/app
-          ignore:
-            - node_modules/
-            - .next/
-        - action: rebuild
-          path: package.json
-
+      - CHOKIDAR_INTERVAL=1000
+      - NEXT_WEBPACK_USEPOLLING=true
+      - NEXT_TELEMETRY_DISABLED=1
   fastapi-dev:
     build:
       context: ./backend
@@ -32,6 +28,9 @@ services:
     environment:
       - WATCHPACK_POLLING=true
       - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./frontend/public/documents:/app/frontend/public/documents
+
     develop:
       watch:
         - action: sync
@@ -42,9 +41,6 @@ services:
             - "*.pyc"
     depends_on:
       - mysql
-    networks:
-      - ollama-docker
-
   mysql:
     image: mysql:8
     container_name: mysql-dev
@@ -55,8 +51,6 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
       - "3306:3306"
-    networks:
-      - ollama-docker
 
   phpmyadmin:
     image: phpmyadmin:latest
