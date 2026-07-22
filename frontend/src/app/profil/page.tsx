@@ -517,19 +517,24 @@ export default function ProfilePage() {
                 src="/documents/cv/cv.pdf"
                 className="h-100 w-full border rounded"
               />
-              <ImportPdf/>
+              <ImportPdf />
             </div>
 
-            <div className="border rounded-lg p-4">
+            <div className="border rounded-lg p-4 flex flex-col gap-2 px-">
               <h3 className="font-semibold mb-3">Lettre de motivation</h3>
               <iframe
                 src="/documents/lettre-motivation/lettre-motivation.pdf"
                 className="h-100 w-full border rounded"
               />
-              <Button className="mt-4 w-full">
-                <Sparkles className="mr-2z h-4 w-4" />
-                Créer une lettre
-              </Button>
+              <ImportPdf
+                textButton={
+                  <>
+                    <Upload className="mr-2z h-4 w-4" />
+                    Importer sa lettre de motivation
+                  </>
+                }
+                target="lettre-motivation"
+              />
             </div>
           </CardContent>
         </Card>
