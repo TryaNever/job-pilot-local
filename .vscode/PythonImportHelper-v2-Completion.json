@@ -123,10 +123,10 @@
     },
     {
         "label": "router",
-        "importPath": "api.postPdf",
-        "description": "api.postPdf",
+        "importPath": "api.post_pdf",
+        "description": "api.post_pdf",
         "isExtraImport": true,
-        "detail": "api.postPdf",
+        "detail": "api.post_pdf",
         "documentation": {}
     },
     {
@@ -149,46 +149,46 @@
     {
         "label": "create_route_upload_pdf",
         "kind": 2,
-        "importPath": "backend.api.postPdf",
-        "description": "backend.api.postPdf",
+        "importPath": "backend.api.post_pdf",
+        "description": "backend.api.post_pdf",
         "peekOfCode": "def create_route_upload_pdf(folder: str):\n    async def upload_pdf(file: UploadFile = File(...)):\n        try:\n            if file.content_type != \"application/pdf\":\n                raise HTTPException(\n                    status_code=400,\n                    detail=\"Only PDF files are allowed\"\n                )\n            folder_path = os.path.join(\n                UPLOAD_DIR,",
-        "detail": "backend.api.postPdf",
+        "detail": "backend.api.post_pdf",
         "documentation": {}
     },
     {
         "label": "router",
         "kind": 5,
-        "importPath": "backend.api.postPdf",
-        "description": "backend.api.postPdf",
+        "importPath": "backend.api.post_pdf",
+        "description": "backend.api.post_pdf",
         "peekOfCode": "router = APIRouter()\nBASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"./frontend/public/documents\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\ndef create_route_upload_pdf(folder: str):\n    async def upload_pdf(file: UploadFile = File(...)):\n        try:\n            if file.content_type != \"application/pdf\":",
-        "detail": "backend.api.postPdf",
+        "detail": "backend.api.post_pdf",
         "documentation": {}
     },
     {
         "label": "BASE_DIR",
         "kind": 5,
-        "importPath": "backend.api.postPdf",
-        "description": "backend.api.postPdf",
+        "importPath": "backend.api.post_pdf",
+        "description": "backend.api.post_pdf",
         "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"./frontend/public/documents\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\ndef create_route_upload_pdf(folder: str):\n    async def upload_pdf(file: UploadFile = File(...)):\n        try:\n            if file.content_type != \"application/pdf\":\n                raise HTTPException(",
-        "detail": "backend.api.postPdf",
+        "detail": "backend.api.post_pdf",
         "documentation": {}
     },
     {
         "label": "UPLOAD_DIR",
         "kind": 5,
-        "importPath": "backend.api.postPdf",
-        "description": "backend.api.postPdf",
+        "importPath": "backend.api.post_pdf",
+        "description": "backend.api.post_pdf",
         "peekOfCode": "UPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"./frontend/public/documents\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\ndef create_route_upload_pdf(folder: str):\n    async def upload_pdf(file: UploadFile = File(...)):\n        try:\n            if file.content_type != \"application/pdf\":\n                raise HTTPException(\n                    status_code=400,",
-        "detail": "backend.api.postPdf",
+        "detail": "backend.api.post_pdf",
         "documentation": {}
     },
     {
         "label": "folders",
         "kind": 5,
-        "importPath": "backend.api.postPdf",
-        "description": "backend.api.postPdf",
+        "importPath": "backend.api.post_pdf",
+        "description": "backend.api.post_pdf",
         "peekOfCode": "folders = [\n    \"cv\",\n    \"lettre-motivation\"\n]\nfor folder in folders:\n    router.post(\n        f\"/upload/{folder}/main\",\n        name=f\"upload_{folder}\"\n    )(create_route_upload_pdf(folder))",
-        "detail": "backend.api.postPdf",
+        "detail": "backend.api.post_pdf",
         "documentation": {}
     },
     {
