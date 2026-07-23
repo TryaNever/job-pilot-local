@@ -30,15 +30,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./frontend/public/documents:/app/frontend/public/documents
-
-    develop:
-      watch:
-        - action: sync
-          path: ./backend
-          target: /app
-          ignore:
-            - __pycache__/
-            - "*.pyc"
+      - ./backend:/app:cached
     depends_on:
       - mysql
   mysql:

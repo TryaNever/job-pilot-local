@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from core.database import create_db_and_tables
-from api.postPdf import router as pdf_router
+from api.post_pdf import router as pdf_router
 from fastapi.middleware.cors import CORSMiddleware
 
 

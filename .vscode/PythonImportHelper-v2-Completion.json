@@ -40,21 +40,11 @@
         "documentation": {}
     },
     {
-        "label": "os",
-        "kind": 6,
+        "label": "upload_file",
+        "importPath": "services.upload_file",
+        "description": "services.upload_file",
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
-        "documentation": {}
-    },
-    {
-        "label": "shutil",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "shutil",
-        "description": "shutil",
-        "detail": "shutil",
+        "detail": "services.upload_file",
         "documentation": {}
     },
     {
@@ -98,11 +88,29 @@
         "documentation": {}
     },
     {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
         "label": "load_dotenv",
         "importPath": "dotenv",
         "description": "dotenv",
         "isExtraImport": true,
         "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
         "documentation": {}
     },
     {
@@ -123,10 +131,10 @@
     },
     {
         "label": "router",
-        "importPath": "api.postPdf",
-        "description": "api.postPdf",
+        "importPath": "api.post_pdf",
+        "description": "api.post_pdf",
         "isExtraImport": true,
-        "detail": "api.postPdf",
+        "detail": "api.post_pdf",
         "documentation": {}
     },
     {
@@ -147,30 +155,30 @@
         "documentation": {}
     },
     {
+        "label": "create_route_upload_pdf",
+        "kind": 2,
+        "importPath": "backend.api.post_pdf",
+        "description": "backend.api.post_pdf",
+        "peekOfCode": "def create_route_upload_pdf(folder: str):\n    async def upload_pdf(file: UploadFile = File(...)):\n        try:\n            if file.content_type != \"application/pdf\":\n                raise HTTPException(\n                    status_code=400,\n                    detail=\"Only PDF files are allowed\"\n                )\n            upload_file(file=file, folder=folder,location=\"./frontend/public/documents\")\n            return {",
+        "detail": "backend.api.post_pdf",
+        "documentation": {}
+    },
+    {
         "label": "router",
         "kind": 5,
-        "importPath": "backend.api.postPdf",
-        "description": "backend.api.postPdf",
-        "peekOfCode": "router = APIRouter()\nBASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"./frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":",
-        "detail": "backend.api.postPdf",
+        "importPath": "backend.api.post_pdf",
+        "description": "backend.api.post_pdf",
+        "peekOfCode": "router = APIRouter()\ndef create_route_upload_pdf(folder: str):\n    async def upload_pdf(file: UploadFile = File(...)):\n        try:\n            if file.content_type != \"application/pdf\":\n                raise HTTPException(\n                    status_code=400,\n                    detail=\"Only PDF files are allowed\"\n                )\n            upload_file(file=file, folder=folder,location=\"./frontend/public/documents\")",
+        "detail": "backend.api.post_pdf",
         "documentation": {}
     },
     {
-        "label": "BASE_DIR",
+        "label": "folders",
         "kind": 5,
-        "importPath": "backend.api.postPdf",
-        "description": "backend.api.postPdf",
-        "peekOfCode": "BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\nUPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"./frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":\n            raise HTTPException(",
-        "detail": "backend.api.postPdf",
-        "documentation": {}
-    },
-    {
-        "label": "UPLOAD_DIR",
-        "kind": 5,
-        "importPath": "backend.api.postPdf",
-        "description": "backend.api.postPdf",
-        "peekOfCode": "UPLOAD_DIR = os.path.abspath(\n    os.path.join(BASE_DIR, \"./frontend/public/documents/cv\")\n)\nos.makedirs(UPLOAD_DIR, exist_ok=True)\n@router.post(\"/upload/cv/main\")\nasync def postPdfCvMain(file: UploadFile = File(...)):\n    try:\n        if file.content_type != \"application/pdf\":\n            raise HTTPException(\n                status_code=400,",
-        "detail": "backend.api.postPdf",
+        "importPath": "backend.api.post_pdf",
+        "description": "backend.api.post_pdf",
+        "peekOfCode": "folders = [\n    \"cv\",\n    \"lettre-motivation\"\n]\nfor folder in folders:\n    router.post(\n        f\"/upload/{folder}/main\",\n        name=f\"upload_{folder}\"\n    )(create_route_upload_pdf(folder))",
+        "detail": "backend.api.post_pdf",
         "documentation": {}
     },
     {
@@ -216,6 +224,15 @@
         "description": "backend.models.offers",
         "peekOfCode": "class Offer(SQLModel, table= True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)",
         "detail": "backend.models.offers",
+        "documentation": {}
+    },
+    {
+        "label": "upload_file",
+        "kind": 2,
+        "importPath": "backend.services.upload_file",
+        "description": "backend.services.upload_file",
+        "peekOfCode": "def upload_file(folder, file, location):\n            BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n            UPLOAD_DIR = os.path.abspath(\n                os.path.join(BASE_DIR, location)\n            )\n            os.makedirs(UPLOAD_DIR, exist_ok=True)\n            folder_path = os.path.join(\n                UPLOAD_DIR,\n                folder\n            )",
+        "detail": "backend.services.upload_file",
         "documentation": {}
     },
     {
