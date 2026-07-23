@@ -38,3 +38,33 @@ async def postPdfCvMain(file: UploadFile = File(...)):
 
     finally:
         await file.close()
+        
+        
+        
+@router.post("/upload/lettre-motivation/main")
+async def postPdfCoverLetterMain(file: UploadFile = File(...)):
+    try:
+        if file.content_type != "application/pdf":
+            raise HTTPException(
+                status_code=400,
+                detail="Only PDF files are allowed"
+            )
+        
+        file_location = os.path.join(UPLOAD_DIR, "lettre-motivatiion.pdf")
+
+        with open(file_location, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+
+        return {
+            "message": "file upload",
+            "filename": "lettre-motivatiion.pdf"
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=str(e)
+        )
+
+    finally:
+        await file.close()
