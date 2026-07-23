@@ -1,70 +1,62 @@
-from fastapi import APIRouter, UploadFile, File,HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException
 import os
 import shutil
 
 router = APIRouter()
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 UPLOAD_DIR = os.path.abspath(
-    os.path.join(BASE_DIR, "./frontend/public/documents/cv")
+    os.path.join(BASE_DIR, "./frontend/public/documents")
 )
 
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-@router.post("/upload/cv/main")
-async def postPdfCvMain(file: UploadFile = File(...)):
-    try:
-        if file.content_type != "application/pdf":
-            raise HTTPException(
-                status_code=400,
-                detail="Only PDF files are allowed"
+
+def create_route_upload_pdf(folder: str):
+
+    async def upload_pdf(file: UploadFile = File(...)):
+
+        try:
+            if file.content_type != "application/pdf":
+                raise HTTPException(
+                    status_code=400,
+                    detail="Only PDF files are allowed"
+                )
+
+            folder_path = os.path.join(
+                UPLOAD_DIR,
+                folder
             )
-        
-        file_location = os.path.join(UPLOAD_DIR, "cv.pdf")
 
-        with open(file_location, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+            os.makedirs(folder_path, exist_ok=True)
 
-        return {
-            "message": "file upload",
-            "filename": "cv.pdf"
-        }
-
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=str(e)
-        )
-
-    finally:
-        await file.close()
-        
-        
-        
-@router.post("/upload/lettre-motivation/main")
-async def postPdfCoverLetterMain(file: UploadFile = File(...)):
-    try:
-        if file.content_type != "application/pdf":
-            raise HTTPException(
-                status_code=400,
-                detail="Only PDF files are allowed"
+            file_location = os.path.join(
+                folder_path,
+                f"{folder}.pdf"
             )
-        
-        file_location = os.path.join(UPLOAD_DIR, "lettre-motivatiion.pdf")
 
-        with open(file_location, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
+            with open(file_location, "wb") as buffer:
+                shutil.copyfileobj(file.file, buffer)
 
-        return {
-            "message": "file upload",
-            "filename": "lettre-motivatiion.pdf"
-        }
+            return {
+                "message": "file uploaded",
+                "filename": f"{folder}.pdf"
+            }
 
-    except Exception as e:
-        raise HTTPException(
-            status_code=500,
-            detail=str(e)
-        )
+        finally:
+            await file.close()
 
-    finally:
-        await file.close()
+    return upload_pdf
+
+folders = [
+    "cv",
+    "lettre-motivation"
+]
+
+
+for folder in folders:
+    router.post(
+        f"/upload/{folder}/main",
+        name=f"upload_{folder}"
+    )(create_route_upload_pdf(folder))
