@@ -1,16 +1,11 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException
-import os
-import shutil
+from services.upload_file import upload_file
 
 router = APIRouter()
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-UPLOAD_DIR = os.path.abspath(
-    os.path.join(BASE_DIR, "./frontend/public/documents")
-)
 
-os.makedirs(UPLOAD_DIR, exist_ok=True)
+
 
 
 def create_route_upload_pdf(folder: str):
@@ -24,20 +19,7 @@ def create_route_upload_pdf(folder: str):
                     detail="Only PDF files are allowed"
                 )
 
-            folder_path = os.path.join(
-                UPLOAD_DIR,
-                folder
-            )
-
-            os.makedirs(folder_path, exist_ok=True)
-
-            file_location = os.path.join(
-                folder_path,
-                f"{folder}.pdf"
-            )
-
-            with open(file_location, "wb") as buffer:
-                shutil.copyfileobj(file.file, buffer)
+            upload_file(file=file, folder=folder,location="./frontend/public/documents")
 
             return {
                 "message": "file uploaded",
