@@ -12,13 +12,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Field, FieldDescription, FieldLabel } from "../ui/field";
-import { ReactNode, useRef } from "react";
+import { Dispatch, ReactNode, SetStateAction, useRef } from "react";
 import { Download } from "lucide-react";
 import { apiFetch } from "@/utils/fetch";
 
 type textButton = {
   textButton?: ReactNode;
   target?: string;
+  setVersion: Dispatch<SetStateAction<number>>
 };
 
 type jsonBackResponse = {
@@ -33,10 +34,11 @@ export default function ImportPdf({
     </>
   ),
   target = "cv",
+  setVersion
 }: textButton) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  function importJson(
+  async function importJson(
     event: React.FormEvent<HTMLFormElement>,
   ): Promise<jsonBackResponse> {
     event.preventDefault();
@@ -51,11 +53,18 @@ export default function ImportPdf({
 
     formData.append("file", file);
 
-    return apiFetch(`/upload/${target}/main`, {
+     const apiResponse = await apiFetch(`/upload/${target}/main`, {
       method: "POST",
       body: formData,
     });
+
+    setVersion(Date.now())
+    console.log("pi");
+    
+    return apiResponse
   }
+    const textTarget = target.replace("-", " ")
+
   return (
     <Dialog>
       <DialogTrigger render={<Button className="text-base w-full py-2" />}>
@@ -65,14 +74,14 @@ export default function ImportPdf({
       <DialogContent className="sm:max-w-175">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold">
-            Mettre a jour votre CV
+            Mettre a jour votre {textTarget}
           </DialogTitle>
         </DialogHeader>
 
         <form className="space-y-6" onSubmit={importJson}>
           <div className="space-y-3">
             <Label htmlFor="url" className="text-lg font-medium">
-              Import ton CV dans l&apos;app en pdf
+              Import ton {textTarget} dans l&apos;app en pdf
             </Label>
 
             <Field>

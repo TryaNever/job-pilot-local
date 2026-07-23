@@ -38,6 +38,13 @@ export default function ProfilePage() {
   };
 
   const [profile, setProfile] = useState<Profile>(defaultProfile);
+  const [lettreMotivationVersion, setLettreMotivationVersion] = useState(0);
+  const [cvVersion, setCvVersion] = useState(0);
+
+  useEffect(() => {
+    console.log(cvVersion);
+    
+  }, [cvVersion])
 
   useEffect(() => {
     const savedProfile = localStorage.getItem("profile");
@@ -514,19 +521,30 @@ export default function ProfilePage() {
             <div className="border rounded-lg p-4 flex flex-col gap-2 px-5">
               <h3 className="font-semibold mb-3">CV</h3>
               <iframe
-                src="/documents/cv/cv.pdf"
+                key={cvVersion}
+                src={`/documents/cv/cv.pdf?v=${cvVersion}`}
                 className="h-100 w-full border rounded"
               />
-              <ImportPdf />
+              <ImportPdf
+                setVersion={setCvVersion}
+                textButton={
+                  <>
+                    <Upload className="mr-2z h-4 w-4" />
+                    Importer son CV
+                  </>
+                }
+              />
             </div>
 
             <div className="border rounded-lg p-4 flex flex-col gap-2 px-">
               <h3 className="font-semibold mb-3">Lettre de motivation</h3>
               <iframe
-                src="/documents/lettre-motivation/lettre-motivation.pdf"
+                key={lettreMotivationVersion}
+                src={`/documents/lettre-motivation/lettre-motivation.pdf?v=${lettreMotivationVersion}`}
                 className="h-100 w-full border rounded"
               />
               <ImportPdf
+                setVersion={setLettreMotivationVersion}
                 textButton={
                   <>
                     <Upload className="mr-2z h-4 w-4" />
