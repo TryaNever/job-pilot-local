@@ -3,11 +3,9 @@
 import * as React from "react";
 
 import { NavMain } from "@/components/nav-main";
-import { SidebarOptInForm } from "@/components/sidebar-opt-in-form";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
