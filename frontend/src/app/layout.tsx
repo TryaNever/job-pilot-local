@@ -52,7 +52,7 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <header className="border-b bg-background">
+        <header className="border-b bg-background flex items-center justify-center">
           <div className="mx-auto flex h-16 max-w-7xl items-center px-6">
             <NavigationMenu>
               <NavigationMenuList className="flex gap-2">
