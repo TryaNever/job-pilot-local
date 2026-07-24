@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Job Pilot",
+  "version": "1.0.0",
+  "description": "Job Pilot Extension",
+
+  "action": {
+    "default_popup": "popup.html"
+  },
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "tabs",
+    "scripting"
+  ],
+
+  "host_permissions": [
+    "http://localhost:8000/*",
+    "https://www.welcometothejungle.com/*"
+  ]
+}
