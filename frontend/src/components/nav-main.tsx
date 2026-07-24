@@ -1,9 +1,6 @@
 "use client"
 
-import {
-  DropdownMenu,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+import Link from "next/link"
 import {
   SidebarGroup,
   SidebarMenu,
@@ -25,17 +22,21 @@ export function NavMain({
     <SidebarGroup>
       <SidebarMenu>
         {items.map((item) => (
-          <DropdownMenu key={item.title}>
-            <SidebarMenuItem>
-              <DropdownMenuTrigger
-                render={
-                  <SidebarMenuButton className="aria-expanded:bg-muted" />
-                }
-              >
-                {item.title}{" "}
-              </DropdownMenuTrigger>
-            </SidebarMenuItem>
-          </DropdownMenu>
+          <SidebarMenuItem key={item.title}>
+            <SidebarMenuButton
+              isActive={item.isActive}
+              render={<Link href={item.url} />}
+              className="
+                transition-colors
+                hover:bg-muted
+                data-[active=true]:bg-primary/10
+                data-[active=true]:text-primary
+              "
+            >
+              {item.icon}
+              <span>{item.title}</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
         ))}
       </SidebarMenu>
     </SidebarGroup>

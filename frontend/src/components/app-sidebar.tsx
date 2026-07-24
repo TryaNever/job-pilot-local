@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { usePathname } from "next/navigation";
 
 import { NavMain } from "@/components/nav-main";
 import {
@@ -14,46 +15,48 @@ import {
 } from "@/components/ui/sidebar";
 import { GalleryVerticalEndIcon } from "lucide-react";
 
-// This is sample data.
-const data = {
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-    },
-    {
-      title: "Build Your Application",
-      url: "#",
-    },
-    {
-      title: "API Reference",
-      url: "#",
-    },
-    {
-      title: "Architecture",
-      url: "#",
-    },
-  ],
-};
+const navMainItems = [
+  {
+    title: "Général",
+    url: "/settings/general",
+  },
+  {
+    title: "Compte",
+    url: "/settings/account",
+  },
+  {
+    title: "Notifications",
+    url: "/settings/notifications",
+  },
+];
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const pathname = usePathname();
+  const items = navMainItems.map((item) => ({
+    ...item,
+    isActive:
+      pathname === item.url ||
+      (pathname === "/settings" && item.url === "/settings/general"),
+  }));
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" render={<a href="#" />}>
+            <SidebarMenuButton size="lg" render={<a href="/settings" />}>
               <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                 <GalleryVerticalEndIcon className="size-4" />
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
-                <span className="font-medium">Settings</span>
+                <span className="font-medium">Paramètres</span>
               </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={items} />
       </SidebarContent>
       <SidebarRail />
     </Sidebar>
