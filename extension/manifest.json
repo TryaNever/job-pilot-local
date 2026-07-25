@@ -1,5 +1,14 @@
 {
   "manifest_version": 3,
   "permissions": ["activeTab", "tabs", "scripting"],
-  "host_permissions": ["<all_urls>"]
+  "host_permissions": ["<all_urls>"],
+  "commands": {
+    "add-job": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+A",
+        "mac": "Command+Shift+A"
+      },
+      "description": "Add new jobs with html"
+    }
+  }
 }
