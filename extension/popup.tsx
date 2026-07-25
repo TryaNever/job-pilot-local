@@ -33,6 +33,7 @@ function isSupportedUrl(url?: string) {
 function IndexPopup() {
   const [domString, setDomString] = useState("")
   const [loading, setLoading] = useState(false)
+  const [responseApi, setResponseApi] = useState({})
 
   const handleScanPage = async () => {
     setLoading(true)
@@ -49,10 +50,6 @@ function IndexPopup() {
         setDomString("Cette page ne peut pas être analysée par une extension.")
         return
       }
-      console.log(chrome)
-      console.log(chrome.tabs)
-      console.log(chrome.scripting)
-
       const results = await chrome.scripting.executeScript({
         target: {
           tabId: tab.id
@@ -73,6 +70,22 @@ function IndexPopup() {
     } catch (error) {
       console.error(error)
       setDomString("Une erreur est survenue pendant l'extraction du HTML.")
+    }
+    try {
+      console.log("test")
+
+      const response = await fetch("http://localhost:8000/api/jobs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ html: domString })
+      })
+
+      const result = await response.json()
+      setResponseApi(result)
+    } catch (error) {
+      setResponseApi({ erreur: "unknow error client" })
     } finally {
       setLoading(false)
     }
@@ -98,13 +111,13 @@ function IndexPopup() {
         {loading ? "Extraction..." : "Afficher le HTML"}
       </button>
 
-      {domString && (
+      {responseApi && (
         <div style={{ marginTop: 16 }}>
           <h3>HTML de la page</h3>
 
           <textarea
             readOnly
-            value={domString}
+            value={JSON.stringify(responseApi)}
             style={{
               width: "100%",
               height: 350,
