@@ -12,7 +12,7 @@ export async function getCurrentTab() {
   }
 }
 
-export function isSupportedUrl(url?: string) {
+export async function isSupportedUrl(url?: string) {
   if (!url) {
     return false
   }
@@ -26,6 +26,7 @@ export function isSupportedUrl(url?: string) {
     "https://vlad-cerisier.fr/"
   ]
   console.log("supported url")
+  console.log(!blockedPrefixes.some((prefix) => url.startsWith(prefix)))
 
   return !blockedPrefixes.some((prefix) => url.startsWith(prefix))
 }
@@ -73,12 +74,13 @@ export async function handleScanPage({
       return
     }
 
-    if (!isSupportedUrl(tab.url)) {
+    if (await !isSupportedUrl(tab.url)) {
       setDomString("Cette page ne peut pas être analysée par une extension.")
       console.log("no supported url")
       return
     }
-    const results = getHtmlWithTab(tab)
+    const results = await getHtmlWithTab(tab)
+    console.log(results)
 
     if (!results.length) {
       setDomString("Impossible de récupérer le HTML.")
