@@ -7,7 +7,6 @@ export async function getCurrentTab() {
 
     return tab ?? null
   } catch (error) {
-    console.error("Erreur lors de la récupération de l'onglet :", error)
     return null
   }
 }
@@ -25,9 +24,6 @@ export async function isSupportedUrl(url?: string) {
     "moz-extension://",
     "https://vlad-cerisier.fr/"
   ]
-  console.log("supported url")
-  console.log(!blockedPrefixes.some((prefix) => url.startsWith(prefix)))
-
   return !blockedPrefixes.some((prefix) => url.startsWith(prefix))
 }
 
@@ -39,8 +35,6 @@ export async function sendHtml(domString) {
     },
     body: JSON.stringify({ html: domString })
   })
-  console.log("fetched end")
-
   return await response.json()
 }
 
@@ -58,7 +52,6 @@ export async function getHtmlWithTab(tab) {
 export async function handleScanPage({
   setLoading,
   setDomString,
-  domString,
   setResponseApi
 }) {
   setLoading(true)
@@ -69,37 +62,29 @@ export async function handleScanPage({
 
     if (!tab?.id) {
       setDomString("Erreur : Impossible de récupérer l'onglet actif.")
-      console.log("Err : tab act")
-
       return
     }
 
     if (await !isSupportedUrl(tab.url)) {
       setDomString("Cette page ne peut pas être analysée par une extension.")
-      console.log("no supported url")
       return
     }
     const results = await getHtmlWithTab(tab)
-    console.log(results)
 
     if (!results.length) {
       setDomString("Impossible de récupérer le HTML.")
-      console.log("no html into tab")
       return
     }
 
     const html = typeof results[0]?.result === "string" ? results[0].result : ""
     setDomString(html || "Aucun HTML n'a été trouvé sur cette page.")
-    console.log("no html")
+
+    const result = await sendHtml(html)
+
+    setResponseApi(result)
   } catch (error) {
     console.error(error)
     setDomString("Une erreur est survenue pendant l'extraction du HTML.")
-  }
-  try {
-    const result = sendHtml(domString)
-    setResponseApi(result)
-  } catch (error) {
-    setResponseApi({ erreur: "unknow error client" })
   } finally {
     setLoading(false)
   }
