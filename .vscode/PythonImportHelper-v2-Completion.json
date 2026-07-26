@@ -105,6 +105,71 @@
         "documentation": {}
     },
     {
+        "label": "Column",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "TIMESTAMP",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Enum",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Text",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Mapped",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "mapped_column",
+        "importPath": "sqlalchemy.orm",
+        "description": "sqlalchemy.orm",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.orm",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "enum",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "enum",
+        "description": "enum",
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
         "label": "shutil",
         "kind": 6,
         "isExtraImport": true,
@@ -218,11 +283,20 @@
         "documentation": {}
     },
     {
+        "label": "StatusOffert",
+        "kind": 6,
+        "importPath": "backend.models.offers",
+        "description": "backend.models.offers",
+        "peekOfCode": "class StatusOffert(enum.Enum):\n    TO_APPLY = \"to_apply\"\n    APPLIED = \"applied\"\n    INTERVIEW = \"interview\"\n    REJECTED = \"rejected\"\n    ACCEPTED = \"accepted\"\nclass Offer(SQLModel, table= True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    entreprise: str = Field(index=True)",
+        "detail": "backend.models.offers",
+        "documentation": {}
+    },
+    {
         "label": "Offer",
         "kind": 6,
         "importPath": "backend.models.offers",
         "description": "backend.models.offers",
-        "peekOfCode": "class Offer(SQLModel, table= True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)",
+        "peekOfCode": "class Offer(SQLModel, table= True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    entreprise: str = Field(index=True)\n    date_posted: datetime = Field(sa_column=Column(TIMESTAMP(timezone=True)))\n    status: Column(Enum(StatusOffert))\n    html_brut: Mapped[str] = mapped_column(Text)\n    html_clear: Mapped[str] = mapped_column(Text)\n    ia_response: Mapped[str] = mapped_column(Text)\n    last_updated: datetime = Field(sa_column=Column(TIMESTAMP(timezone=True)))",
         "detail": "backend.models.offers",
         "documentation": {}
     },
