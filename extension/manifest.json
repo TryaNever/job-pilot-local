@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "permissions": ["activeTab", "tabs", "scripting"],
+  "permissions": ["activeTab", "tabs", "scripting", "notifications"],
   "host_permissions": ["<all_urls>"],
   "commands": {
     "add-job": {
