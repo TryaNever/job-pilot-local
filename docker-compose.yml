@@ -1,5 +1,5 @@
 services:
-  nextjs-dev:
+  nextjs:
     build:
       context: ./frontend
       dockerfile: Dockerfile.dev
@@ -17,7 +17,7 @@ services:
       - CHOKIDAR_INTERVAL=1000
       - NEXT_WEBPACK_USEPOLLING=true
       - NEXT_TELEMETRY_DISABLED=1
-  fastapi-dev:
+  fastapi:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
@@ -32,10 +32,11 @@ services:
       - ./frontend/public/documents:/app/frontend/public/documents
       - ./backend:/app:cached
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
+        restart: true
   mysql:
     image: mysql:8
-    container_name: mysql-dev
     environment:
       MYSQL_DATABASE: job_pilot
       MYSQL_USER: user
@@ -43,10 +44,14 @@ services:
       MYSQL_ROOT_PASSWORD: rootpassword
     ports:
       - "3306:3306"
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 20s
+      retries: 10
 
   phpmyadmin:
     image: phpmyadmin:latest
-    container_name: phpmyadmin-dev
     ports:
       - "8080:80"
     environment:
