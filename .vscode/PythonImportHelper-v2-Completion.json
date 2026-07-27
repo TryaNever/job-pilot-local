@@ -105,6 +105,22 @@
         "documentation": {}
     },
     {
+        "label": "Field",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
+        "isExtraImport": true,
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
         "label": "*",
         "importPath": "models",
         "description": "models",
@@ -159,6 +175,22 @@
         "description": "sqlalchemy",
         "isExtraImport": true,
         "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "ForeignKey",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Company",
+        "importPath": "models.company",
+        "description": "models.company",
+        "isExtraImport": true,
+        "detail": "models.company",
         "documentation": {}
     },
     {
@@ -275,11 +307,20 @@
         "documentation": {}
     },
     {
+        "label": "Company",
+        "kind": 6,
+        "importPath": "backend.models.company",
+        "description": "backend.models.company",
+        "peekOfCode": "class Company(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)",
+        "detail": "backend.models.company",
+        "documentation": {}
+    },
+    {
         "label": "StatusOffert",
         "kind": 6,
         "importPath": "backend.models.offers",
         "description": "backend.models.offers",
-        "peekOfCode": "class StatusOffert(enum.Enum):\n    TO_APPLY = \"to_apply\"\n    APPLIED = \"applied\"\n    INTERVIEW = \"interview\"\n    REJECTED = \"rejected\"\n    ACCEPTED = \"accepted\"\nclass Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    entreprise: str = Field(index=True)",
+        "peekOfCode": "class StatusOffert(enum.Enum):\n    TO_APPLY = \"to_apply\"\n    APPLIED = \"applied\"\n    INTERVIEW = \"interview\"\n    REJECTED = \"rejected\"\n    ACCEPTED = \"accepted\"\nclass Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int = Field(foreign_key=\"company.id\")",
         "detail": "backend.models.offers",
         "documentation": {}
     },
@@ -288,7 +329,7 @@
         "kind": 6,
         "importPath": "backend.models.offers",
         "description": "backend.models.offers",
-        "peekOfCode": "class Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    entreprise: str = Field(index=True)\n    date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))\n    status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))\n    html_brut: str = Field(sa_column=Column(Text))\n    html_clear: str = Field(sa_column=Column(Text))\n    ia_response: str = Field(sa_column=Column(Text))\n    last_updated: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))",
+        "peekOfCode": "class Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int = Field(foreign_key=\"company.id\")\n    date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))\n    status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))\n    html_brut: str = Field(sa_column=Column(Text))\n    html_clear: str = Field(sa_column=Column(Text))\n    ia_response: str = Field(sa_column=Column(Text))\n    last_updated: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))",
         "detail": "backend.models.offers",
         "documentation": {}
     },
