@@ -48,6 +48,23 @@
         "documentation": {}
     },
     {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
         "label": "SQLModel",
         "importPath": "sqlmodel",
         "description": "sqlmodel",
@@ -56,7 +73,7 @@
         "documentation": {}
     },
     {
-        "label": "create_engine",
+        "label": "Session",
         "importPath": "sqlmodel",
         "description": "sqlmodel",
         "isExtraImport": true,
@@ -64,7 +81,7 @@
         "documentation": {}
     },
     {
-        "label": "Session",
+        "label": "create_engine",
         "importPath": "sqlmodel",
         "description": "sqlmodel",
         "isExtraImport": true,
@@ -88,20 +105,92 @@
         "documentation": {}
     },
     {
-        "label": "os",
-        "kind": 6,
+        "label": "Field",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
         "isExtraImport": true,
-        "importPath": "os",
-        "description": "os",
-        "detail": "os",
+        "detail": "sqlmodel",
         "documentation": {}
     },
     {
-        "label": "load_dotenv",
-        "importPath": "dotenv",
-        "description": "dotenv",
+        "label": "SQLModel",
+        "importPath": "sqlmodel",
+        "description": "sqlmodel",
         "isExtraImport": true,
-        "detail": "dotenv",
+        "detail": "sqlmodel",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "models",
+        "description": "models",
+        "isExtraImport": true,
+        "detail": "models",
+        "documentation": {}
+    },
+    {
+        "label": "enum",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "enum",
+        "description": "enum",
+        "detail": "enum",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "TIMESTAMP",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Column",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Enum",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Text",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "ForeignKey",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
+        "label": "Company",
+        "importPath": "models.company",
+        "description": "models.company",
+        "isExtraImport": true,
+        "detail": "models.company",
         "documentation": {}
     },
     {
@@ -218,11 +307,29 @@
         "documentation": {}
     },
     {
+        "label": "Company",
+        "kind": 6,
+        "importPath": "backend.models.company",
+        "description": "backend.models.company",
+        "peekOfCode": "class Company(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)",
+        "detail": "backend.models.company",
+        "documentation": {}
+    },
+    {
+        "label": "StatusOffert",
+        "kind": 6,
+        "importPath": "backend.models.offers",
+        "description": "backend.models.offers",
+        "peekOfCode": "class StatusOffert(enum.Enum):\n    TO_APPLY = \"to_apply\"\n    APPLIED = \"applied\"\n    INTERVIEW = \"interview\"\n    REJECTED = \"rejected\"\n    ACCEPTED = \"accepted\"\nclass Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int = Field(foreign_key=\"company.id\")",
+        "detail": "backend.models.offers",
+        "documentation": {}
+    },
+    {
         "label": "Offer",
         "kind": 6,
         "importPath": "backend.models.offers",
         "description": "backend.models.offers",
-        "peekOfCode": "class Offer(SQLModel, table= True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)",
+        "peekOfCode": "class Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int = Field(foreign_key=\"company.id\")\n    date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))\n    status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))\n    html_brut: str = Field(sa_column=Column(Text))\n    html_clear: str = Field(sa_column=Column(Text))\n    ia_response: str = Field(sa_column=Column(Text))\n    last_updated: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))",
         "detail": "backend.models.offers",
         "documentation": {}
     },

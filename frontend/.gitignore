@@ -9,6 +9,7 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+CUsersalexiworkspacejob-pilot-local/
 
 # testing
 /coverage
