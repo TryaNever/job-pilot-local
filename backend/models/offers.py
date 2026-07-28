@@ -25,3 +25,4 @@ class Offer(SQLModel, table=True):
     created_date: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))
     url_cv: str = Field(sa_column=Column(Text))
     url_lettre: str = Field(sa_column=Column(Text))
+    url_offers: str = Field(sa_column=Column(Text))

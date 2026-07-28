@@ -27,13 +27,13 @@ export async function isSupportedUrl(url?: string) {
   return !blockedPrefixes.some((prefix) => url.startsWith(prefix))
 }
 
-export async function sendHtml(domString) {
-  const response = await fetch("http://localhost:8000/api/jobs", {
+export async function sendHtml(domString, tab) {
+  const response = await fetch("http://localhost:8000/upload/offers", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ html: domString })
+    body: JSON.stringify({ html_brut: domString, url_offers: tab.url })
   })
   return await response.json()
 }
@@ -79,7 +79,7 @@ export async function handleScanPage({
     const html = typeof results[0]?.result === "string" ? results[0].result : ""
     setDomString(html || "Aucun HTML n'a été trouvé sur cette page.")
 
-    const result = await sendHtml(html)
+    const result = await sendHtml(html, tab)
 
     setResponseApi(result)
   } catch (error) {
