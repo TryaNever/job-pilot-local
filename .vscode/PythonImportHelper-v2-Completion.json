@@ -8,6 +8,22 @@
         "documentation": {}
     },
     {
+        "label": "Body",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "UploadFile",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -37,6 +53,15 @@
         "description": "fastapi",
         "isExtraImport": true,
         "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
         "documentation": {}
     },
     {
@@ -227,6 +252,14 @@
         "documentation": {}
     },
     {
+        "label": "router",
+        "importPath": "api.offers",
+        "description": "api.offers",
+        "isExtraImport": true,
+        "detail": "api.offers",
+        "documentation": {}
+    },
+    {
         "label": "CORSMiddleware",
         "importPath": "fastapi.middleware.cors",
         "description": "fastapi.middleware.cors",
@@ -235,12 +268,12 @@
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
+        "label": "router",
+        "kind": 5,
+        "importPath": "backend.api.offers",
+        "description": "backend.api.offers",
+        "peekOfCode": "router = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(html: json = Body(...)):\n    print(html)\n    return {\"message\": \"OK\"}",
+        "detail": "backend.api.offers",
         "documentation": {}
     },
     {
