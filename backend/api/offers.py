@@ -1,7 +1,9 @@
-from fastapi import APIRouter, Body
+from fastapi import APIRouter
 from pydantic import BaseModel
 from datetime import datetime
+from services.soup import SoupCleaner
 
+cleaner = SoupCleaner()
 
 router = APIRouter()
 
@@ -19,10 +21,12 @@ class OfferSchema(BaseModel):
     url_lettre: str | None = None
     url_offers: str | None = None
 
+
+
 @router.post("/upload/offers")
 async def new_offer(offer: OfferSchema):
-    print(offer)
-    print(offer.html_brut)
-    print(offer.url_offers)
+    clean_html = cleaner.clean(offer.html_brut)
 
-    return {"message": "OK"}
+    clean_text = cleaner.to_text(clean_html)
+    return {"message": clean_text}
+
