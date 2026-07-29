@@ -37,5 +37,4 @@ class Ia_service():
         response.raise_for_status()
         data = response.json()
 
-        print(data["response"])
         return data["response"]
