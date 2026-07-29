@@ -2,11 +2,11 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from datetime import datetime
 from services.soup import SoupCleaner
-from services.ia_generate import Ia_generate
+from services.ia.ia_service import Ia_service
 
 cleaner = SoupCleaner()
 
-ia_agent = Ia_generate()
+ia_agent = Ia_service()
 
 router = APIRouter()
 

@@ -80,11 +80,11 @@
         "documentation": {}
     },
     {
-        "label": "Ia_generate",
-        "importPath": "services.ia_generate",
-        "description": "services.ia_generate",
+        "label": "Ia_service",
+        "importPath": "services.ia.ia_service",
+        "description": "services.ia.ia_service",
         "isExtraImport": true,
-        "detail": "services.ia_generate",
+        "detail": "services.ia.ia_service",
         "documentation": {}
     },
     {
@@ -243,6 +243,14 @@
         "documentation": {}
     },
     {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
         "label": "BeautifulSoup",
         "importPath": "bs4",
         "description": "bs4",
@@ -330,7 +338,7 @@
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_generate()\nrouter = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None",
+        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_service()\nrouter = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -339,7 +347,7 @@
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "ia_agent = Ia_generate()\nrouter = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None\n    ia_response: str | None = None",
+        "peekOfCode": "ia_agent = Ia_service()\nrouter = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None\n    ia_response: str | None = None",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -443,21 +451,12 @@
         "documentation": {}
     },
     {
-        "label": "Ia_generate",
+        "label": "Ia_service",
         "kind": 6,
-        "importPath": "backend.services.ia_generate",
-        "description": "backend.services.ia_generate",
-        "peekOfCode": "class Ia_generate():\n    def fetch_ia(self,html_prompt):\n        payload = {\n        \"model\": \"qwen2.5:7b\",\n        \"prompt\": str(html_prompt),\n        \"system\": \"Tu es resumeur de texte profetionnelle tu vas recevoir un text dans le désordre et tu dois mettre de l'ordre dans l'idée et ne pas oublié des détails n'oublie jamais que ce text viens de page web\",\n        \"stream\": False,\n        \"options\": {\n        \"temperature\": 0.2,\n        \"num_predict\": 512",
-        "detail": "backend.services.ia_generate",
-        "documentation": {}
-    },
-    {
-        "label": "url",
-        "kind": 5,
-        "importPath": "backend.services.ia_generate",
-        "description": "backend.services.ia_generate",
-        "peekOfCode": "url = \"http://ollama:11434/api/generate\"\nclass Ia_generate():\n    def fetch_ia(self,html_prompt):\n        payload = {\n        \"model\": \"qwen2.5:7b\",\n        \"prompt\": str(html_prompt),\n        \"system\": \"Tu es resumeur de texte profetionnelle tu vas recevoir un text dans le désordre et tu dois mettre de l'ordre dans l'idée et ne pas oublié des détails n'oublie jamais que ce text viens de page web\",\n        \"stream\": False,\n        \"options\": {\n        \"temperature\": 0.2,",
-        "detail": "backend.services.ia_generate",
+        "importPath": "backend.services.ia.ia_service",
+        "description": "backend.services.ia.ia_service",
+        "peekOfCode": "class Ia_service():\n    PROMPTS_DIR = Path(__file__).parent / \"prompts\"\n    PROMPTS_NAME = \"default\"\n    URL = \"http://ollama:11434/api/generate\"\n    def __init__(self, prompts_name: str = \"default.md\"):\n        self.PROMPTS_NAME = prompts_name\n    def get_systeme_prompt(self) -> str:\n        path = self.PROMPTS_DIR / f\"{self.PROMPTS_NAME}.md\"\n        if not path.exists():\n            path = self.PROMPTS_DIR / \"default.md\"",
+        "detail": "backend.services.ia.ia_service",
         "documentation": {}
     },
     {
