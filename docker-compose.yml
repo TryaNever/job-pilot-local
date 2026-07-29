@@ -35,6 +35,8 @@ services:
       mysql:
         condition: service_healthy
         restart: true
+    networks:
+    - ollama-docker
   mysql:
     image: mysql:8
     environment:
@@ -49,6 +51,8 @@ services:
       interval: 5s
       timeout: 20s
       retries: 10
+    networks:
+    - ollama-docker
 
   phpmyadmin:
     image: phpmyadmin:latest

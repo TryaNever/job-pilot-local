@@ -8,14 +8,6 @@
         "documentation": {}
     },
     {
-        "label": "Body",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -56,12 +48,43 @@
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
+        "label": "BaseModel",
+        "importPath": "pydantic",
+        "description": "pydantic",
         "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
+        "detail": "pydantic",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "SoupCleaner",
+        "importPath": "services.soup",
+        "description": "services.soup",
+        "isExtraImport": true,
+        "detail": "services.soup",
+        "documentation": {}
+    },
+    {
+        "label": "Ia_generate",
+        "importPath": "services.ia_generate",
+        "description": "services.ia_generate",
+        "isExtraImport": true,
+        "detail": "services.ia_generate",
         "documentation": {}
     },
     {
@@ -163,14 +186,6 @@
         "documentation": {}
     },
     {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
         "label": "TIMESTAMP",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
@@ -216,6 +231,31 @@
         "description": "models.company",
         "isExtraImport": true,
         "detail": "models.company",
+        "documentation": {}
+    },
+    {
+        "label": "requests",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "requests",
+        "description": "requests",
+        "detail": "requests",
+        "documentation": {}
+    },
+    {
+        "label": "BeautifulSoup",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
+        "documentation": {}
+    },
+    {
+        "label": "Comment",
+        "importPath": "bs4",
+        "description": "bs4",
+        "isExtraImport": true,
+        "detail": "bs4",
         "documentation": {}
     },
     {
@@ -268,11 +308,47 @@
         "documentation": {}
     },
     {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
+        "label": "OfferSchema",
+        "kind": 6,
+        "importPath": "backend.api.offers",
+        "description": "backend.api.offers",
+        "peekOfCode": "class OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None\n    ia_response: str | None = None\n    last_updated: datetime | None = None\n    created_date: datetime | None = None",
+        "detail": "backend.api.offers",
+        "documentation": {}
+    },
+    {
+        "label": "cleaner",
+        "kind": 5,
+        "importPath": "backend.api.offers",
+        "description": "backend.api.offers",
+        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_generate()\nrouter = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None",
+        "detail": "backend.api.offers",
+        "documentation": {}
+    },
+    {
+        "label": "ia_agent",
+        "kind": 5,
+        "importPath": "backend.api.offers",
+        "description": "backend.api.offers",
+        "peekOfCode": "ia_agent = Ia_generate()\nrouter = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None\n    ia_response: str | None = None",
+        "detail": "backend.api.offers",
+        "documentation": {}
+    },
+    {
         "label": "router",
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "router = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(html: json = Body(...)):\n    print(html)\n    return {\"message\": \"OK\"}",
+        "peekOfCode": "router = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None\n    ia_response: str | None = None\n    last_updated: datetime | None = None",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -364,6 +440,33 @@
         "description": "backend.models.offers",
         "peekOfCode": "class Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int = Field(foreign_key=\"company.id\")\n    date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))\n    status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))\n    html_brut: str = Field(sa_column=Column(Text))\n    html_clear: str = Field(sa_column=Column(Text))\n    ia_response: str = Field(sa_column=Column(Text))\n    last_updated: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))",
         "detail": "backend.models.offers",
+        "documentation": {}
+    },
+    {
+        "label": "Ia_generate",
+        "kind": 6,
+        "importPath": "backend.services.ia_generate",
+        "description": "backend.services.ia_generate",
+        "peekOfCode": "class Ia_generate():\n    def fetch_ia(self,html_prompt):\n        payload = {\n        \"model\": \"qwen2.5:7b\",\n        \"prompt\": str(html_prompt),\n        \"system\": \"Tu es resumeur de texte profetionnelle tu vas recevoir un text dans le désordre et tu dois mettre de l'ordre dans l'idée et ne pas oublié des détails n'oublie jamais que ce text viens de page web\",\n        \"stream\": False,\n        \"options\": {\n        \"temperature\": 0.2,\n        \"num_predict\": 512",
+        "detail": "backend.services.ia_generate",
+        "documentation": {}
+    },
+    {
+        "label": "url",
+        "kind": 5,
+        "importPath": "backend.services.ia_generate",
+        "description": "backend.services.ia_generate",
+        "peekOfCode": "url = \"http://ollama:11434/api/generate\"\nclass Ia_generate():\n    def fetch_ia(self,html_prompt):\n        payload = {\n        \"model\": \"qwen2.5:7b\",\n        \"prompt\": str(html_prompt),\n        \"system\": \"Tu es resumeur de texte profetionnelle tu vas recevoir un text dans le désordre et tu dois mettre de l'ordre dans l'idée et ne pas oublié des détails n'oublie jamais que ce text viens de page web\",\n        \"stream\": False,\n        \"options\": {\n        \"temperature\": 0.2,",
+        "detail": "backend.services.ia_generate",
+        "documentation": {}
+    },
+    {
+        "label": "SoupCleaner",
+        "kind": 6,
+        "importPath": "backend.services.soup",
+        "description": "backend.services.soup",
+        "peekOfCode": "class SoupCleaner:\n    REMOVE_TAGS = [\n        \"script\",\n        \"style\",\n        \"head\",\n        \"meta\",\n        \"noscript\",\n        \"button\",\n        \"nav\",\n        \"footer\",",
+        "detail": "backend.services.soup",
         "documentation": {}
     },
     {

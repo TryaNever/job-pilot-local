@@ -2,8 +2,11 @@ from fastapi import APIRouter
 from pydantic import BaseModel
 from datetime import datetime
 from services.soup import SoupCleaner
+from services.ia_generate import Ia_generate
 
 cleaner = SoupCleaner()
+
+ia_agent = Ia_generate()
 
 router = APIRouter()
 
@@ -26,7 +29,8 @@ class OfferSchema(BaseModel):
 @router.post("/upload/offers")
 async def new_offer(offer: OfferSchema):
     clean_html = cleaner.clean(offer.html_brut)
-
-    clean_text = cleaner.to_text(clean_html)
-    return {"message": clean_text}
+    offer.html_clear = cleaner.to_text(clean_html)
+    print(offer.html_clear)
+    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)
+    return {"message": str(ia_agent_response)}
 
