@@ -65,6 +65,8 @@ services:
       PMA_PASSWORD: rootpassword
     depends_on:
       - mysql
+    networks:
+      - ollama-docker
 
   ollama:
     volumes:
