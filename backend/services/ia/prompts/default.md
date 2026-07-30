@@ -109,6 +109,9 @@ FORMAT DE SORTIE :
   }
 }
 
+RÈGLES Date :
+- La colonne est de type DATETIME MySQL et attend une date au format YYYY-MM-DD HH:MM:SS (par exemple 2023-10-17 00:00:00), sans le séparateur T ni le suffixe Z indiquant le fuseau UTC.
+
 RÈGLES _meta.confidence :
 - 1.0 : information explicitement présente.
 - 0.8 : information présente mais normalisée.

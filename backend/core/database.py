@@ -1,22 +1,38 @@
+from encodings import undefined
 import os
 from dotenv import load_dotenv
 from sqlmodel import SQLModel, Session, create_engine
 from models import *
 
-load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+class database:
+    
+    def __init__(self):
+        load_dotenv()
+        DATABASE_URL = os.getenv("DATABASE_URL")
+        
+        self.engine = create_engine(
+            DATABASE_URL,
+            echo=True
+        )
+        
+    def create_db_and_tables(self):
+        SQLModel.metadata.create_all(self.engine)
+        
+    def get_session(self):
+        with Session(self.engine) as session:
+            yield session
+        
 
-engine = create_engine(
-    DATABASE_URL,
-    echo=True
-)
+class entity_manager(database):
+    
+    
+    def __init__(self):
+        super().__init__()
+        self.session = Session(self.engine)
+        
+    def post(self,model): 
+        self.session.add(model)
+        self.session.commit()
 
-
-def create_db_and_tables():
-    SQLModel.metadata.create_all(engine)
-
-
-def get_session():
-    with Session(engine) as session:
-        yield session
+        self.session.close()
