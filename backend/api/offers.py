@@ -1,8 +1,10 @@
+import json
 from fastapi import APIRouter
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date, datetime
 from services.soup import SoupCleaner
 from services.ia.ia_service import Ia_service
+from models.offers import StatusOffert
 
 cleaner = SoupCleaner()
 
@@ -30,7 +32,13 @@ class OfferSchema(BaseModel):
 async def new_offer(offer: OfferSchema):
     clean_html = cleaner.clean(offer.html_brut)
     offer.html_clear = cleaner.to_text(clean_html)
-    print(offer.html_clear)
     ia_agent_response = ia_agent.fetch_ia(offer.html_clear)
+    data = json.loads(ia_agent_response)
+    offer.ia_response = data
+    offer.name = data["job"]["title"]
+    offer.date_posted = data["publication_date"]
+    offer.status = StatusOffert.TO_APPLY
+    offer.last_updated = date()
+    offer.created_date = date()
     return {"message": str(ia_agent_response)}
 
