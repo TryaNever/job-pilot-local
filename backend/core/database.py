@@ -24,8 +24,7 @@ class database:
             yield session
         
 
-class entity_manager(database):
-    
+class entityManager(database):
     
     def __init__(self):
         super().__init__()
