@@ -22,6 +22,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile.dev
     image: fastapi-sample:dev
+    restart: unless-stopped
     container_name: fastapi-sample-dev
     ports:
       - "8000:8000"
@@ -44,6 +45,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: rootpassword
+    restart: unless-stopped
     ports:
       - "3306:3306"
     healthcheck:
@@ -56,6 +58,7 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:latest
+    restart: unless-stopped
     ports:
       - "8080:80"
     environment:
@@ -79,7 +82,7 @@ services:
     ports:
       - 7869:11434
     environment:
-      - OLLAMA_KEEP_ALIVE=24h
+      - OLLAMA_KEEP_ALIVE=1h
     networks:
       - ollama-docker
     deploy:
@@ -89,7 +92,25 @@ services:
             - driver: nvidia
               count: all 
               capabilities: [gpu]
-
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - ollama-docker
+  worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    command: taskiq worker broker:broker
+    restart: unless-stopped
+    depends_on:
+      - redis
+    volumes:
+      - ./backend:/app:cached
+    networks:
+      - ollama-docker
 networks:
   ollama-docker:
     external: false

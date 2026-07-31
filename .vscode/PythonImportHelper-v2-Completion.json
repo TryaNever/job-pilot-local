@@ -1,5 +1,31 @@
 [
     {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -48,27 +74,19 @@
         "documentation": {}
     },
     {
-        "label": "BaseModel",
-        "importPath": "pydantic",
-        "description": "pydantic",
+        "label": "entity_manager",
+        "importPath": "core.database",
+        "description": "core.database",
         "isExtraImport": true,
-        "detail": "pydantic",
+        "detail": "core.database",
         "documentation": {}
     },
     {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
+        "label": "database",
+        "importPath": "core.database",
+        "description": "core.database",
         "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
+        "detail": "core.database",
         "documentation": {}
     },
     {
@@ -88,11 +106,35 @@
         "documentation": {}
     },
     {
+        "label": "Offer",
+        "importPath": "models.offers",
+        "description": "models.offers",
+        "isExtraImport": true,
+        "detail": "models.offers",
+        "documentation": {}
+    },
+    {
+        "label": "StatusOffert",
+        "importPath": "models.offers",
+        "description": "models.offers",
+        "isExtraImport": true,
+        "detail": "models.offers",
+        "documentation": {}
+    },
+    {
         "label": "upload_file",
         "importPath": "services.upload_file",
         "description": "services.upload_file",
         "isExtraImport": true,
         "detail": "services.upload_file",
+        "documentation": {}
+    },
+    {
+        "label": "undefined",
+        "importPath": "encodings",
+        "description": "encodings",
+        "isExtraImport": true,
+        "detail": "encodings",
         "documentation": {}
     },
     {
@@ -102,6 +144,14 @@
         "importPath": "os",
         "description": "os",
         "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
         "documentation": {}
     },
     {
@@ -226,11 +276,27 @@
         "documentation": {}
     },
     {
+        "label": "LONGTEXT",
+        "importPath": "sqlalchemy.dialects.mysql",
+        "description": "sqlalchemy.dialects.mysql",
+        "isExtraImport": true,
+        "detail": "sqlalchemy.dialects.mysql",
+        "documentation": {}
+    },
+    {
         "label": "Company",
         "importPath": "models.company",
         "description": "models.company",
         "isExtraImport": true,
         "detail": "models.company",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
         "documentation": {}
     },
     {
@@ -240,14 +306,6 @@
         "importPath": "requests",
         "description": "requests",
         "detail": "requests",
-        "documentation": {}
-    },
-    {
-        "label": "Path",
-        "importPath": "pathlib",
-        "description": "pathlib",
-        "isExtraImport": true,
-        "detail": "pathlib",
         "documentation": {}
     },
     {
@@ -284,14 +342,6 @@
         "documentation": {}
     },
     {
-        "label": "create_db_and_tables",
-        "importPath": "core.database",
-        "description": "core.database",
-        "isExtraImport": true,
-        "detail": "core.database",
-        "documentation": {}
-    },
-    {
         "label": "router",
         "importPath": "api.post_pdf",
         "description": "api.post_pdf",
@@ -316,29 +366,11 @@
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
-        "label": "OfferSchema",
-        "kind": 6,
-        "importPath": "backend.api.offers",
-        "description": "backend.api.offers",
-        "peekOfCode": "class OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None\n    ia_response: str | None = None\n    last_updated: datetime | None = None\n    created_date: datetime | None = None",
-        "detail": "backend.api.offers",
-        "documentation": {}
-    },
-    {
         "label": "cleaner",
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_service()\nrouter = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None",
+        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_service()\nrouter = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -347,7 +379,7 @@
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "ia_agent = Ia_service()\nrouter = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None\n    ia_response: str | None = None",
+        "peekOfCode": "ia_agent = Ia_service()\nrouter = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)\n    offer.name = data[\"job\"][\"title\"]",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -356,7 +388,7 @@
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "router = APIRouter()\nclass OfferSchema(BaseModel):\n    name: str | None = None\n    company: int | None = None\n    date_posted: datetime | None = None\n    status: str | None = None\n    html_brut: str\n    html_clear: str | None = None\n    ia_response: str | None = None\n    last_updated: datetime | None = None",
+        "peekOfCode": "router = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)\n    offer.name = data[\"job\"][\"title\"]\n    offer.company = None #data[\"job\"][\"company\"]",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -388,38 +420,20 @@
         "documentation": {}
     },
     {
-        "label": "create_db_and_tables",
-        "kind": 2,
+        "label": "database",
+        "kind": 6,
         "importPath": "backend.core.database",
         "description": "backend.core.database",
-        "peekOfCode": "def create_db_and_tables():\n    SQLModel.metadata.create_all(engine)\ndef get_session():\n    with Session(engine) as session:\n        yield session",
+        "peekOfCode": "class database:\n    def __init__(self):\n        load_dotenv()\n        DATABASE_URL = os.getenv(\"DATABASE_URL\")\n        self.engine = create_engine(\n            DATABASE_URL,\n            echo=True\n        )\n    def create_db_and_tables(self):\n        SQLModel.metadata.create_all(self.engine)",
         "detail": "backend.core.database",
         "documentation": {}
     },
     {
-        "label": "get_session",
-        "kind": 2,
+        "label": "entity_manager",
+        "kind": 6,
         "importPath": "backend.core.database",
         "description": "backend.core.database",
-        "peekOfCode": "def get_session():\n    with Session(engine) as session:\n        yield session",
-        "detail": "backend.core.database",
-        "documentation": {}
-    },
-    {
-        "label": "DATABASE_URL",
-        "kind": 5,
-        "importPath": "backend.core.database",
-        "description": "backend.core.database",
-        "peekOfCode": "DATABASE_URL = os.getenv(\"DATABASE_URL\")\nengine = create_engine(\n    DATABASE_URL,\n    echo=True\n)\ndef create_db_and_tables():\n    SQLModel.metadata.create_all(engine)\ndef get_session():\n    with Session(engine) as session:\n        yield session",
-        "detail": "backend.core.database",
-        "documentation": {}
-    },
-    {
-        "label": "engine",
-        "kind": 5,
-        "importPath": "backend.core.database",
-        "description": "backend.core.database",
-        "peekOfCode": "engine = create_engine(\n    DATABASE_URL,\n    echo=True\n)\ndef create_db_and_tables():\n    SQLModel.metadata.create_all(engine)\ndef get_session():\n    with Session(engine) as session:\n        yield session",
+        "peekOfCode": "class entity_manager(database):\n    def __init__(self):\n        super().__init__()\n        self.session = Session(self.engine)\n    def post(self,model): \n        self.session.add(model)\n        self.session.commit()\n        self.session.close()",
         "detail": "backend.core.database",
         "documentation": {}
     },
@@ -437,7 +451,7 @@
         "kind": 6,
         "importPath": "backend.models.offers",
         "description": "backend.models.offers",
-        "peekOfCode": "class StatusOffert(enum.Enum):\n    TO_APPLY = \"to_apply\"\n    APPLIED = \"applied\"\n    INTERVIEW = \"interview\"\n    REJECTED = \"rejected\"\n    ACCEPTED = \"accepted\"\nclass Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int = Field(foreign_key=\"company.id\")",
+        "peekOfCode": "class StatusOffert(enum.Enum):\n    TO_APPLY = \"to_apply\"\n    APPLIED = \"applied\"\n    INTERVIEW = \"interview\"\n    REJECTED = \"rejected\"\n    ACCEPTED = \"accepted\"\nclass Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int | None = Field(foreign_key=\"company.id\")",
         "detail": "backend.models.offers",
         "documentation": {}
     },
@@ -446,7 +460,7 @@
         "kind": 6,
         "importPath": "backend.models.offers",
         "description": "backend.models.offers",
-        "peekOfCode": "class Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int = Field(foreign_key=\"company.id\")\n    date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))\n    status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))\n    html_brut: str = Field(sa_column=Column(Text))\n    html_clear: str = Field(sa_column=Column(Text))\n    ia_response: str = Field(sa_column=Column(Text))\n    last_updated: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))",
+        "peekOfCode": "class Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int | None = Field(foreign_key=\"company.id\")\n    date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))\n    status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))\n    html_brut: str = Field(sa_column=Column(LONGTEXT))\n    html_clear: str = Field(sa_column=Column(LONGTEXT))\n    ia_response: str = Field(sa_column=Column(LONGTEXT))\n    last_updated: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))",
         "detail": "backend.models.offers",
         "documentation": {}
     },
@@ -455,7 +469,7 @@
         "kind": 6,
         "importPath": "backend.services.ia.ia_service",
         "description": "backend.services.ia.ia_service",
-        "peekOfCode": "class Ia_service():\n    PROMPTS_DIR = Path(__file__).parent / \"prompts\"\n    PROMPTS_NAME = \"default\"\n    URL = \"http://ollama:11434/api/generate\"\n    def __init__(self, prompts_name: str = \"default.md\"):\n        self.PROMPTS_NAME = prompts_name\n    def get_systeme_prompt(self) -> str:\n        path = self.PROMPTS_DIR / f\"{self.PROMPTS_NAME}.md\"\n        if not path.exists():\n            path = self.PROMPTS_DIR / \"default.md\"",
+        "peekOfCode": "class Ia_service():\n    PROMPTS_DIR = Path(__file__).parent / \"prompts\"\n    PROMPTS_NAME = \"default\"\n    URL = \"http://ollama:11434/api/generate\"\n    def __init__(self, prompts_name: str = \"default.md\"):\n        load_dotenv()\n        self.PROMPTS_NAME = prompts_name\n        self.model_name = os.getenv(\"MODEL_OLLAMA\", \"qwen2.5:7b\")\n    def get_systeme_prompt(self) -> str:\n        path = self.PROMPTS_DIR / f\"{self.PROMPTS_NAME}.md\"",
         "detail": "backend.services.ia.ia_service",
         "documentation": {}
     },
@@ -473,7 +487,7 @@
         "kind": 2,
         "importPath": "backend.services.upload_file",
         "description": "backend.services.upload_file",
-        "peekOfCode": "def upload_file(folder, file, location):\n            BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n            UPLOAD_DIR = os.path.abspath(\n                os.path.join(BASE_DIR, location)\n            )\n            os.makedirs(UPLOAD_DIR, exist_ok=True)\n            folder_path = os.path.join(\n                UPLOAD_DIR,\n                folder\n            )",
+        "peekOfCode": "def upload_file(folder, file, location):\n    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n    UPLOAD_DIR = os.path.abspath(\n        os.path.join(BASE_DIR, location)\n    )\n    os.makedirs(UPLOAD_DIR, exist_ok=True)\n    folder_path = os.path.join(\n        UPLOAD_DIR,\n        folder\n    )",
         "detail": "backend.services.upload_file",
         "documentation": {}
     },
