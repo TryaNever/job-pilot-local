@@ -1,31 +1,5 @@
 [
     {
-        "label": "datetime",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "datetime",
-        "description": "datetime",
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -74,19 +48,51 @@
         "documentation": {}
     },
     {
-        "label": "entity_manager",
-        "importPath": "core.database",
-        "description": "core.database",
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
         "isExtraImport": true,
-        "detail": "core.database",
+        "detail": "fastapi",
         "documentation": {}
     },
     {
-        "label": "database",
-        "importPath": "core.database",
-        "description": "core.database",
+        "label": "ia_call",
+        "importPath": "tasks",
+        "description": "tasks",
         "isExtraImport": true,
-        "detail": "core.database",
+        "detail": "tasks",
+        "documentation": {}
+    },
+    {
+        "label": "Offer",
+        "importPath": "models.offers",
+        "description": "models.offers",
+        "isExtraImport": true,
+        "detail": "models.offers",
+        "documentation": {}
+    },
+    {
+        "label": "Offer",
+        "importPath": "models.offers",
+        "description": "models.offers",
+        "isExtraImport": true,
+        "detail": "models.offers",
+        "documentation": {}
+    },
+    {
+        "label": "StatusOffert",
+        "importPath": "models.offers",
+        "description": "models.offers",
+        "isExtraImport": true,
+        "detail": "models.offers",
+        "documentation": {}
+    },
+    {
+        "label": "SoupCleaner",
+        "importPath": "services.soup",
+        "description": "services.soup",
+        "isExtraImport": true,
+        "detail": "services.soup",
         "documentation": {}
     },
     {
@@ -106,19 +112,11 @@
         "documentation": {}
     },
     {
-        "label": "Offer",
-        "importPath": "models.offers",
-        "description": "models.offers",
+        "label": "Ia_service",
+        "importPath": "services.ia.ia_service",
+        "description": "services.ia.ia_service",
         "isExtraImport": true,
-        "detail": "models.offers",
-        "documentation": {}
-    },
-    {
-        "label": "StatusOffert",
-        "importPath": "models.offers",
-        "description": "models.offers",
-        "isExtraImport": true,
-        "detail": "models.offers",
+        "detail": "services.ia.ia_service",
         "documentation": {}
     },
     {
@@ -236,6 +234,23 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "TIMESTAMP",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
@@ -300,6 +315,15 @@
         "documentation": {}
     },
     {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
@@ -334,11 +358,35 @@
         "documentation": {}
     },
     {
+        "label": "ListQueueBroker",
+        "importPath": "taskiq_redis",
+        "description": "taskiq_redis",
+        "isExtraImport": true,
+        "detail": "taskiq_redis",
+        "documentation": {}
+    },
+    {
         "label": "asynccontextmanager",
         "importPath": "contextlib",
         "description": "contextlib",
         "isExtraImport": true,
         "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "database",
+        "importPath": "core.database",
+        "description": "core.database",
+        "isExtraImport": true,
+        "detail": "core.database",
+        "documentation": {}
+    },
+    {
+        "label": "entity_manager",
+        "importPath": "core.database",
+        "description": "core.database",
+        "isExtraImport": true,
+        "detail": "core.database",
         "documentation": {}
     },
     {
@@ -366,11 +414,19 @@
         "documentation": {}
     },
     {
+        "label": "broker",
+        "importPath": "broker",
+        "description": "broker",
+        "isExtraImport": true,
+        "detail": "broker",
+        "documentation": {}
+    },
+    {
         "label": "cleaner",
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_service()\nrouter = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)",
+        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_service()\nrouter = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    task_result = await ia_call(offer)\n    return {\"message\": \"tasks end\"}",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -379,7 +435,7 @@
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "ia_agent = Ia_service()\nrouter = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)\n    offer.name = data[\"job\"][\"title\"]",
+        "peekOfCode": "ia_agent = Ia_service()\nrouter = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    task_result = await ia_call(offer)\n    return {\"message\": \"tasks end\"}",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -388,7 +444,7 @@
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "router = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)\n    offer.name = data[\"job\"][\"title\"]\n    offer.company = None #data[\"job\"][\"company\"]",
+        "peekOfCode": "router = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    task_result = await ia_call(offer)\n    return {\"message\": \"tasks end\"}",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -492,6 +548,15 @@
         "documentation": {}
     },
     {
+        "label": "broker",
+        "kind": 5,
+        "importPath": "backend.broker",
+        "description": "backend.broker",
+        "peekOfCode": "broker = ListQueueBroker(\"redis://redis:6379\")",
+        "detail": "backend.broker",
+        "documentation": {}
+    },
+    {
         "label": "root",
         "kind": 2,
         "importPath": "backend.main",
@@ -507,6 +572,33 @@
         "description": "backend.main",
         "peekOfCode": "app = FastAPI(lifespan=lifespan)\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\n        \"http://localhost:3000\",\n    ],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)",
         "detail": "backend.main",
+        "documentation": {}
+    },
+    {
+        "label": "cleaner",
+        "kind": 5,
+        "importPath": "backend.tasks",
+        "description": "backend.tasks",
+        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_service()\nrouter = APIRouter()\n@broker.task\nasync def ia_call(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)",
+        "detail": "backend.tasks",
+        "documentation": {}
+    },
+    {
+        "label": "ia_agent",
+        "kind": 5,
+        "importPath": "backend.tasks",
+        "description": "backend.tasks",
+        "peekOfCode": "ia_agent = Ia_service()\nrouter = APIRouter()\n@broker.task\nasync def ia_call(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)\n    offer.name = data[\"job\"][\"title\"]",
+        "detail": "backend.tasks",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "backend.tasks",
+        "description": "backend.tasks",
+        "peekOfCode": "router = APIRouter()\n@broker.task\nasync def ia_call(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)\n    offer.name = data[\"job\"][\"title\"]\n    offer.company = None #data[\"job\"][\"company\"]",
+        "detail": "backend.tasks",
         "documentation": {}
     },
     {
