@@ -1,5 +1,22 @@
 [
     {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -40,14 +57,6 @@
         "documentation": {}
     },
     {
-        "label": "FastAPI",
-        "importPath": "fastapi",
-        "description": "fastapi",
-        "isExtraImport": true,
-        "detail": "fastapi",
-        "documentation": {}
-    },
-    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -56,11 +65,35 @@
         "documentation": {}
     },
     {
-        "label": "ia_call",
-        "importPath": "tasks",
-        "description": "tasks",
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
         "isExtraImport": true,
-        "detail": "tasks",
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "get_redis_client",
+        "importPath": "core.redis",
+        "description": "core.redis",
+        "isExtraImport": true,
+        "detail": "core.redis",
+        "documentation": {}
+    },
+    {
+        "label": "get_redis_client",
+        "importPath": "core.redis",
+        "description": "core.redis",
+        "isExtraImport": true,
+        "detail": "core.redis",
+        "documentation": {}
+    },
+    {
+        "label": "post_offer",
+        "importPath": "tasks.post_offer",
+        "description": "tasks.post_offer",
+        "isExtraImport": true,
+        "detail": "tasks.post_offer",
         "documentation": {}
     },
     {
@@ -88,43 +121,19 @@
         "documentation": {}
     },
     {
-        "label": "SoupCleaner",
-        "importPath": "services.soup",
-        "description": "services.soup",
-        "isExtraImport": true,
-        "detail": "services.soup",
-        "documentation": {}
-    },
-    {
-        "label": "SoupCleaner",
-        "importPath": "services.soup",
-        "description": "services.soup",
-        "isExtraImport": true,
-        "detail": "services.soup",
-        "documentation": {}
-    },
-    {
-        "label": "Ia_service",
-        "importPath": "services.ia.ia_service",
-        "description": "services.ia.ia_service",
-        "isExtraImport": true,
-        "detail": "services.ia.ia_service",
-        "documentation": {}
-    },
-    {
-        "label": "Ia_service",
-        "importPath": "services.ia.ia_service",
-        "description": "services.ia.ia_service",
-        "isExtraImport": true,
-        "detail": "services.ia.ia_service",
-        "documentation": {}
-    },
-    {
         "label": "upload_file",
         "importPath": "services.upload_file",
         "description": "services.upload_file",
         "isExtraImport": true,
         "detail": "services.upload_file",
+        "documentation": {}
+    },
+    {
+        "label": "ListQueueBroker",
+        "importPath": "taskiq_redis",
+        "description": "taskiq_redis",
+        "isExtraImport": true,
+        "detail": "taskiq_redis",
         "documentation": {}
     },
     {
@@ -225,29 +234,29 @@
         "documentation": {}
     },
     {
+        "label": "Redis",
+        "importPath": "redis.asyncio",
+        "description": "redis.asyncio",
+        "isExtraImport": true,
+        "detail": "redis.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "json",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "json",
+        "description": "json",
+        "detail": "json",
+        "documentation": {}
+    },
+    {
         "label": "enum",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "enum",
         "description": "enum",
         "detail": "enum",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "datetime",
-        "description": "datetime",
-        "detail": "datetime",
-        "documentation": {}
-    },
-    {
-        "label": "datetime",
-        "importPath": "datetime",
-        "description": "datetime",
-        "isExtraImport": true,
-        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -315,23 +324,6 @@
         "documentation": {}
     },
     {
-        "label": "json",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "json",
-        "description": "json",
-        "detail": "json",
-        "documentation": {}
-    },
-    {
-        "label": "echo",
-        "importPath": "click",
-        "description": "click",
-        "isExtraImport": true,
-        "detail": "click",
-        "documentation": {}
-    },
-    {
         "label": "requests",
         "kind": 6,
         "isExtraImport": true,
@@ -366,11 +358,59 @@
         "documentation": {}
     },
     {
-        "label": "ListQueueBroker",
-        "importPath": "taskiq_redis",
-        "description": "taskiq_redis",
+        "label": "Context",
+        "importPath": "taskiq",
+        "description": "taskiq",
         "isExtraImport": true,
-        "detail": "taskiq_redis",
+        "detail": "taskiq",
+        "documentation": {}
+    },
+    {
+        "label": "EntityManager",
+        "importPath": "core.database",
+        "description": "core.database",
+        "isExtraImport": true,
+        "detail": "core.database",
+        "documentation": {}
+    },
+    {
+        "label": "Database",
+        "importPath": "core.database",
+        "description": "core.database",
+        "isExtraImport": true,
+        "detail": "core.database",
+        "documentation": {}
+    },
+    {
+        "label": "IaService",
+        "importPath": "services.ia.ia_service",
+        "description": "services.ia.ia_service",
+        "isExtraImport": true,
+        "detail": "services.ia.ia_service",
+        "documentation": {}
+    },
+    {
+        "label": "SoupCleaner",
+        "importPath": "services.soup",
+        "description": "services.soup",
+        "isExtraImport": true,
+        "detail": "services.soup",
+        "documentation": {}
+    },
+    {
+        "label": "broker",
+        "importPath": "core.broker",
+        "description": "core.broker",
+        "isExtraImport": true,
+        "detail": "core.broker",
+        "documentation": {}
+    },
+    {
+        "label": "RedisTasks",
+        "importPath": "core.redis_tasks",
+        "description": "core.redis_tasks",
+        "isExtraImport": true,
+        "detail": "core.redis_tasks",
         "documentation": {}
     },
     {
@@ -379,22 +419,6 @@
         "description": "contextlib",
         "isExtraImport": true,
         "detail": "contextlib",
-        "documentation": {}
-    },
-    {
-        "label": "database",
-        "importPath": "core.database",
-        "description": "core.database",
-        "isExtraImport": true,
-        "detail": "core.database",
-        "documentation": {}
-    },
-    {
-        "label": "entity_manager",
-        "importPath": "core.database",
-        "description": "core.database",
-        "isExtraImport": true,
-        "detail": "core.database",
         "documentation": {}
     },
     {
@@ -422,37 +446,11 @@
         "documentation": {}
     },
     {
-        "label": "broker",
-        "importPath": "broker",
-        "description": "broker",
-        "isExtraImport": true,
-        "detail": "broker",
-        "documentation": {}
-    },
-    {
-        "label": "cleaner",
-        "kind": 5,
-        "importPath": "backend.api.offers",
-        "description": "backend.api.offers",
-        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_service()\nrouter = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    task_result = await ia_call(offer)\n    return {\"message\": \"tasks end\"}",
-        "detail": "backend.api.offers",
-        "documentation": {}
-    },
-    {
-        "label": "ia_agent",
-        "kind": 5,
-        "importPath": "backend.api.offers",
-        "description": "backend.api.offers",
-        "peekOfCode": "ia_agent = Ia_service()\nrouter = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    task_result = await ia_call(offer)\n    return {\"message\": \"tasks end\"}",
-        "detail": "backend.api.offers",
-        "documentation": {}
-    },
-    {
         "label": "router",
         "kind": 5,
         "importPath": "backend.api.offers",
         "description": "backend.api.offers",
-        "peekOfCode": "router = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    task_result = await ia_call(offer)\n    return {\"message\": \"tasks end\"}",
+        "peekOfCode": "router = APIRouter()\n@router.post(\"/upload/offers\")\nasync def new_offer(offer: Offer):\n    redis = get_redis_client()\n    task_result = await post_offer.kiq(offer)\n    task_id = task_result.task_id\n    await redis.hset(\n    f\"task:{task_id}\",\n    mapping={\n        \"status\": \"QUEUED\",",
         "detail": "backend.api.offers",
         "documentation": {}
     },
@@ -484,21 +482,57 @@
         "documentation": {}
     },
     {
-        "label": "database",
+        "label": "broker",
+        "kind": 5,
+        "importPath": "backend.core.broker",
+        "description": "backend.core.broker",
+        "peekOfCode": "broker = ListQueueBroker(\"redis://redis:6379\")",
+        "detail": "backend.core.broker",
+        "documentation": {}
+    },
+    {
+        "label": "Database",
         "kind": 6,
         "importPath": "backend.core.database",
         "description": "backend.core.database",
-        "peekOfCode": "class database:\n    def __init__(self):\n        load_dotenv()\n        DATABASE_URL = os.getenv(\"DATABASE_URL\")\n        self.engine = create_engine(\n            DATABASE_URL,\n            echo=True\n        )\n    def create_db_and_tables(self):\n        SQLModel.metadata.create_all(self.engine)",
+        "peekOfCode": "class Database:\n    def __init__(self):\n        load_dotenv()\n        DATABASE_URL = os.getenv(\"DATABASE_URL\")\n        self.engine = create_engine(\n            DATABASE_URL,\n            echo=True\n        )\n    def create_db_and_tables(self):\n        SQLModel.metadata.create_all(self.engine)",
         "detail": "backend.core.database",
         "documentation": {}
     },
     {
-        "label": "entity_manager",
+        "label": "EntityManager",
         "kind": 6,
         "importPath": "backend.core.database",
         "description": "backend.core.database",
-        "peekOfCode": "class entity_manager(database):\n    def __init__(self):\n        super().__init__()\n        self.session = Session(self.engine)\n    def post(self,model): \n        self.session.add(model)\n        self.session.commit()\n        self.session.close()",
+        "peekOfCode": "class EntityManager(Database):\n    def __init__(self):\n        super().__init__()\n        self.session = Session(self.engine)\n    def post(self,model): \n        self.session.add(model)\n        self.session.commit()\n        self.session.close()",
         "detail": "backend.core.database",
+        "documentation": {}
+    },
+    {
+        "label": "get_redis_client",
+        "kind": 2,
+        "importPath": "backend.core.redis",
+        "description": "backend.core.redis",
+        "peekOfCode": "def get_redis_client():\n    return redis_client",
+        "detail": "backend.core.redis",
+        "documentation": {}
+    },
+    {
+        "label": "redis_client",
+        "kind": 5,
+        "importPath": "backend.core.redis",
+        "description": "backend.core.redis",
+        "peekOfCode": "redis_client = Redis(\n    host=\"redis\",\n    port=6379,\n    db=0,\n    username=None,\n    password=None,\n    decode_responses=True,\n)\ndef get_redis_client():\n    return redis_client",
+        "detail": "backend.core.redis",
+        "documentation": {}
+    },
+    {
+        "label": "RedisTasks",
+        "kind": 6,
+        "importPath": "backend.core.redis_tasks",
+        "description": "backend.core.redis_tasks",
+        "peekOfCode": "class RedisTasks:\n    def __init__(self, redis):\n        self.redis = redis\n    async def update_task(\n        self,\n        task_id,\n        step,\n        progress,\n        status=\"processing\"\n    ):",
+        "detail": "backend.core.redis_tasks",
         "documentation": {}
     },
     {
@@ -529,11 +563,11 @@
         "documentation": {}
     },
     {
-        "label": "Ia_service",
+        "label": "IaService",
         "kind": 6,
         "importPath": "backend.services.ia.ia_service",
         "description": "backend.services.ia.ia_service",
-        "peekOfCode": "class Ia_service():\n    PROMPTS_DIR = Path(__file__).parent / \"prompts\"\n    PROMPTS_NAME = \"default\"\n    URL = \"http://ollama:11434/api/generate\"\n    DATA_DYNAMIC = {\"{{CURRENT_DATE}}\" : datetime.datetime.now()}\n    def __init__(self, prompts_name: str = \"default.md\"):\n        load_dotenv()\n        self.PROMPTS_NAME = prompts_name\n        self.model_name = os.getenv(\"MODEL_OLLAMA\", \"qwen2.5:7b\")\n    def get_systeme_prompt(self) -> str:",
+        "peekOfCode": "class IaService():\n    PROMPTS_DIR = Path(__file__).parent / \"prompts\"\n    PROMPTS_NAME = \"default\"\n    URL = \"http://ollama:11434/api/generate\"\n    def __init__(self, prompts_name: str = \"default.md\"):\n        load_dotenv()\n        self.PROMPTS_NAME = prompts_name\n        self.model_name = os.getenv(\"MODEL_OLLAMA\", \"qwen2.5:7b\")\n    def get_systeme_prompt(self) -> str:\n        path = self.PROMPTS_DIR / f\"{self.PROMPTS_NAME}.md\"",
         "detail": "backend.services.ia.ia_service",
         "documentation": {}
     },
@@ -556,12 +590,30 @@
         "documentation": {}
     },
     {
-        "label": "broker",
+        "label": "cleaner",
         "kind": 5,
-        "importPath": "backend.broker",
-        "description": "backend.broker",
-        "peekOfCode": "broker = ListQueueBroker(\"redis://redis:6379\")",
-        "detail": "backend.broker",
+        "importPath": "backend.tasks.post_offer",
+        "description": "backend.tasks.post_offer",
+        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = IaService()\nrouter = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Context):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    print(await tasks.get_all_tasks())\n    await tasks.update_task(",
+        "detail": "backend.tasks.post_offer",
+        "documentation": {}
+    },
+    {
+        "label": "ia_agent",
+        "kind": 5,
+        "importPath": "backend.tasks.post_offer",
+        "description": "backend.tasks.post_offer",
+        "peekOfCode": "ia_agent = IaService()\nrouter = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Context):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    print(await tasks.get_all_tasks())\n    await tasks.update_task(\n        task_id,",
+        "detail": "backend.tasks.post_offer",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "backend.tasks.post_offer",
+        "description": "backend.tasks.post_offer",
+        "peekOfCode": "router = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Context):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    print(await tasks.get_all_tasks())\n    await tasks.update_task(\n        task_id,\n        \"CLEAN_HTML\",",
+        "detail": "backend.tasks.post_offer",
         "documentation": {}
     },
     {
@@ -580,33 +632,6 @@
         "description": "backend.main",
         "peekOfCode": "app = FastAPI(lifespan=lifespan)\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=[\n        \"http://localhost:3000\",\n    ],\n    allow_credentials=True,\n    allow_methods=[\"*\"],\n    allow_headers=[\"*\"],\n)",
         "detail": "backend.main",
-        "documentation": {}
-    },
-    {
-        "label": "cleaner",
-        "kind": 5,
-        "importPath": "backend.tasks",
-        "description": "backend.tasks",
-        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = Ia_service()\nrouter = APIRouter()\n@broker.task\nasync def ia_call(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)",
-        "detail": "backend.tasks",
-        "documentation": {}
-    },
-    {
-        "label": "ia_agent",
-        "kind": 5,
-        "importPath": "backend.tasks",
-        "description": "backend.tasks",
-        "peekOfCode": "ia_agent = Ia_service()\nrouter = APIRouter()\n@broker.task\nasync def ia_call(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)\n    offer.name = data[\"job\"][\"title\"]",
-        "detail": "backend.tasks",
-        "documentation": {}
-    },
-    {
-        "label": "router",
-        "kind": 5,
-        "importPath": "backend.tasks",
-        "description": "backend.tasks",
-        "peekOfCode": "router = APIRouter()\n@broker.task\nasync def ia_call(offer: Offer):\n    clean_html = cleaner.clean(offer.html_brut)\n    offer.html_clear = cleaner.to_text(clean_html)\n    ia_agent_response = ia_agent.fetch_ia(offer.html_clear)\n    offer.ia_response = ia_agent_response\n    data = json.loads(ia_agent_response)\n    offer.name = data[\"job\"][\"title\"]\n    offer.company = None #data[\"job\"][\"company\"]",
-        "detail": "backend.tasks",
         "documentation": {}
     },
     {
