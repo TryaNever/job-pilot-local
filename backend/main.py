@@ -1,14 +1,16 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
-from core.database import create_db_and_tables
+from core.database import database
 from api.post_pdf import router as pdf_router
+from api.offers import router as offers_router
 from fastapi.middleware.cors import CORSMiddleware
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    create_db_and_tables()
+    database_core = database()
+    database_core.create_db_and_tables()
     yield
 
 
@@ -25,6 +27,7 @@ app.add_middleware(
 )
 
 app.include_router(pdf_router)
+app.include_router(offers_router)
 
 
 @app.get("/")
