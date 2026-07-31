@@ -1,8 +1,12 @@
 from redis.asyncio import Redis
 
 redis_client = Redis(
-    "redis://redis:6379",
-    decode_responses=True
+    host="redis",
+    port=6379,
+    db=0,
+    username=None,
+    password=None,
+    decode_responses=True,
 )
 
 

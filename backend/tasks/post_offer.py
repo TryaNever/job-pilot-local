@@ -2,35 +2,30 @@ import datetime
 import json
 
 from taskiq import Context
-from core.database import entity_manager
+from core.database import EntityManager
 from models.offers import Offer, StatusOffert
 
 from fastapi import APIRouter
-from services.ia.ia_service import Ia_service
+from services.ia.ia_service import IaService
 from services.soup import SoupCleaner
-from core.broker import broker, redis_tasks
-
+from core.broker import broker
+from core.redis import get_redis_client
+from core.redis_tasks import RedisTasks
 
 
 cleaner = SoupCleaner()
-
-ia_agent = Ia_service()
-
+ia_agent = IaService()
 router = APIRouter()
 
-
-from backend.core.broker import broker
-from backend.core.redis import get_redis_client
-from backend.core.redis_tasks import RedisTasks
-
-
 @broker.task
-async def ia_call(offer: Offer, ctx: Context):
+async def post_offer(offer: Offer, ctx: Context):
 
     task_id = ctx.message.task_id
 
     redis_client = get_redis_client()
     tasks = RedisTasks(redis_client)
+    
+    print(await tasks.get_all_tasks())
 
     await tasks.update_task(
         task_id,
@@ -72,7 +67,7 @@ async def ia_call(offer: Offer, ctx: Context):
     offer.last_updated = datetime.datetime.now()
     offer.created_date = datetime.datetime.now()
 
-    entitymanager = entity_manager()
+    entitymanager = EntityManager()
     entitymanager.post(offer)
 
     await tasks.update_task(

@@ -1,28 +1,27 @@
 
+import datetime
+
 from fastapi import APIRouter
-import redis
-from backend.tasks.ia_call import ia_call
+from core.redis import get_redis_client
+from tasks.post_offer import post_offer
 from models.offers import Offer
-from services.soup import SoupCleaner
-from services.ia.ia_service import Ia_service
 
-cleaner = SoupCleaner()
-
-ia_agent = Ia_service()
 
 router = APIRouter()
 
 
 @router.post("/upload/offers")
 async def new_offer(offer: Offer):
-    task_result = await ia_call.kiq(offer)
+    redis = get_redis_client()
+    task_result = await post_offer.kiq(offer)
     
     task_id = task_result.task_id
     
     await redis.hset(
     f"task:{task_id}",
     mapping={
-        "status": "queued",
+        "status": "QUEUED",
         "progress": 0,
+        "created_at": datetime.datetime.now().timestamp()
     })
-    return {"message": "tasks end"}
+    return {"message": "tasks send to redis todo set webhook to get advence info"}

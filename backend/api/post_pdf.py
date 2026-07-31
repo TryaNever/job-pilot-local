@@ -4,10 +4,6 @@ from services.upload_file import upload_file
 router = APIRouter()
 
 
-
-
-
-
 def create_route_upload_pdf(folder: str):
 
     async def upload_pdf(file: UploadFile = File(...)):

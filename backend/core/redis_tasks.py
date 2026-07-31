@@ -1,3 +1,6 @@
+import json
+
+
 class RedisTasks:
 
     def __init__(self, redis):
@@ -15,16 +18,27 @@ class RedisTasks:
             mapping={
                 "status": status,
                 "step": step,
-                "progress": progress
+                "progress": progress,
             }
         )
 
         await self.redis.publish(
             "tasks",
-            {
+            json.dumps({
             "task_id": task_id,
             "status": status,
             "step": step,
-            "progress": progress
-            }
+            "progress": progress,
+            })
         )
+    
+    async def get_all_tasks(self):
+        tasks = []
+
+        async for key in self.redis.scan_iter("task:*"):
+            task = await self.redis.hgetall(key)
+            tasks.append(task)
+
+        tasks.sort(key=lambda t: float(t["created_at"]))
+
+        return tasks

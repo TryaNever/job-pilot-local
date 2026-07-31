@@ -5,7 +5,7 @@ from sqlmodel import SQLModel, Session, create_engine
 from models import *
 
 
-class database:
+class Database:
     
     def __init__(self):
         load_dotenv()
@@ -24,7 +24,7 @@ class database:
             yield session
         
 
-class entityManager(database):
+class EntityManager(Database):
     
     def __init__(self):
         super().__init__()

@@ -3,19 +3,15 @@ import os
 from pathlib import Path
 import json
 
-from click import echo
 import requests
 from dotenv import load_dotenv
 
 
-class Ia_service():
+class IaService():
     PROMPTS_DIR = Path(__file__).parent / "prompts"
     PROMPTS_NAME = "default"
     URL = "http://ollama:11434/api/generate"
-    DATA_DYNAMIC = {   
-        "{{CURRENT_DATE}}": datetime.datetime.now().strftime("%Y-%m-%d"),
-        "{{CURRENT_TIME}}": datetime.datetime.now().strftime("%H:%M:%S"),
-    }
+    
 
     def __init__(self, prompts_name: str = "default.md"):
         load_dotenv()
@@ -23,18 +19,23 @@ class Ia_service():
         self.model_name = os.getenv("MODEL_OLLAMA", "qwen2.5:7b")
 
     def get_systeme_prompt(self) -> str:
+        
         path = self.PROMPTS_DIR / f"{self.PROMPTS_NAME}.md"
         
         if not path.exists():
             path = self.PROMPTS_DIR / "default.md"
         system_prompt = path.read_text(encoding="utf-8")
         
-        for key, value in self.DATA_DYNAMIC.items():
+        data_dynamic = {   
+            "{{CURRENT_DATE}}": datetime.datetime.now().strftime("%Y-%m-%d"),
+            "{{CURRENT_TIME}}": datetime.datetime.now().strftime("%H:%M:%S"),
+        }
+        
+        for key, value in data_dynamic.items():
             system_prompt = system_prompt.replace(key,value)
         return system_prompt
 
     def fetch_ia(self, html_prompt):
-        print(self.get_systeme_prompt())
         systeme = self.get_systeme_prompt()
         payload = {
             "model": self.model_name,
