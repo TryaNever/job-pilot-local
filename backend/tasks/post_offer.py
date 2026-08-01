@@ -4,6 +4,7 @@ from typing import Annotated
 
 from taskiq import TaskiqDepends
 from taskiq.context import Context
+from services.parser import Parser
 from core.database import EntityManager
 from models.offers import Offer, StatusOffert
 
@@ -26,8 +27,6 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
 
     redis_client = get_redis_client()
     tasks = RedisTasks(redis_client)
-    
-    print(await tasks.get_all_tasks())
 
     await tasks.update_task(
         task_id,
@@ -51,13 +50,14 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
         offer.html_clear
     )
 
-    offer.ia_response = ia_agent_response
-
     data = json.loads(ia_agent_response)
-
+    
+    offer.ia_response = str(ia_agent_response)
     offer.name = data["job"]["title"]
     offer.company = None  # data["job"]["company"]
-    offer.date_posted = data["job"]["publication_date"]
+    
+    parser = Parser()
+    offer.date_posted = parser.parse_date_posted(data["job"]["publication_date"])
 
     await tasks.update_task(
         task_id,
