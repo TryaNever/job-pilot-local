@@ -129,3 +129,7 @@ RÈGLES _meta.source :
 
 OBJECTIF :
 Produire un JSON déterministe, précis et exploitable par une base de données, un moteur de recherche, un système de matching CV/offre ou un pipeline RAG.
+Retourne uniquement un JSON valide.
+Ne mets aucun texte avant ou après.
+N'utilise pas de markdown.
+Respecte strictement la syntaxe JSON.
