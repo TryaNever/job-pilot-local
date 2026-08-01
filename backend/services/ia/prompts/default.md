@@ -111,7 +111,7 @@ FORMAT DE SORTIE :
 
 RÈGLES Date :
 - La colonne est de type DATETIME MySQL et attend une date au format YYYY-MM-DD HH:MM:SS (par exemple 2023-10-17 00:00:00), sans le séparateur T ni le suffixe Z indiquant le fuseau UTC.
-- Si tu as besoin d'une date de référence on est le {{CURRENT_DATE}} {{CURRENT_TIME}} dont si il y a marqué hier tu return 1 jour avant etc
+- Si tu as besoin d'une date de référence on est le {{CURRENT_DATE}} {{CURRENT_TIME}}
 
 RÈGLES _meta.confidence :
 - 1.0 : information explicitement présente.
