@@ -22,7 +22,6 @@ router = APIRouter()
 
 @broker.task
 async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
-    print("into post_offer task")
     task_id = ctx.message.task_id
 
     redis_client = get_redis_client()
