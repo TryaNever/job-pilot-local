@@ -97,16 +97,23 @@ services:
     restart: unless-stopped
     ports:
       - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+      start_period: 5s
     networks:
       - ollama-docker
   worker:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
-    command: taskiq worker broker:broker
+    command: taskiq worker core.broker:broker tasks
     restart: unless-stopped
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
     volumes:
       - ./backend:/app:cached
     networks:
