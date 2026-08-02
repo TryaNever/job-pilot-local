@@ -25,13 +25,12 @@ function IndexPopup() {
             setResponseApi
           })
         }
-        disabled={loading}
         style={{
           width: "100%",
           padding: "10px",
           cursor: loading ? "default" : "pointer"
         }}>
-        {loading ? "Extraction..." : "Afficher le HTML"}
+        ajouter cette offre
       </button>
 
       {responseApi && (

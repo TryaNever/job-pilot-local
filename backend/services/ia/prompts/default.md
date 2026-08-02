@@ -111,6 +111,7 @@ FORMAT DE SORTIE :
 
 RÈGLES Date :
 - La colonne est de type DATETIME MySQL et attend une date au format YYYY-MM-DD HH:MM:SS (par exemple 2023-10-17 00:00:00), sans le séparateur T ni le suffixe Z indiquant le fuseau UTC.
+- Si tu as besoin d'une date de référence on est le {{CURRENT_DATE}} {{CURRENT_TIME}}
 
 RÈGLES _meta.confidence :
 - 1.0 : information explicitement présente.
@@ -128,3 +129,7 @@ RÈGLES _meta.source :
 
 OBJECTIF :
 Produire un JSON déterministe, précis et exploitable par une base de données, un moteur de recherche, un système de matching CV/offre ou un pipeline RAG.
+Retourne uniquement un JSON valide.
+Ne mets aucun texte avant ou après.
+N'utilise pas de markdown.
+Respecte strictement la syntaxe JSON.
