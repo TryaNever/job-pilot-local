@@ -51,8 +51,6 @@ export async function getHtmlWithTab(tab) {
 
 export async function handleScanPage({
   setLoading,
-  setDomString,
-  setResponseApi
 }) {
   setLoading(true)
 
@@ -61,18 +59,15 @@ export async function handleScanPage({
     console.log("getted current tab")
 
     if (!tab?.id) {
-      // setDomString("Erreur : Impossible de récupérer l'onglet actif.")
       return
     }
 
     if (await !isSupportedUrl(tab.url)) {
-      // setDomString("Cette page ne peut pas être analysée par une extension.")
       return
     }
     const results = await getHtmlWithTab(tab)
 
     if (!results.length) {
-      // setDomString("Impossible de récupérer le HTML.")
       return
     }
 
@@ -81,7 +76,6 @@ export async function handleScanPage({
 
     const result = await sendHtml(html, tab)
 
-    setResponseApi(result)
   } catch (error) {
     console.error(error)
     // setDomString("Une erreur est survenue pendant l'extraction du HTML.")
