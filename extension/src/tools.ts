@@ -61,30 +61,30 @@ export async function handleScanPage({
     console.log("getted current tab")
 
     if (!tab?.id) {
-      setDomString("Erreur : Impossible de récupérer l'onglet actif.")
+      // setDomString("Erreur : Impossible de récupérer l'onglet actif.")
       return
     }
 
     if (await !isSupportedUrl(tab.url)) {
-      setDomString("Cette page ne peut pas être analysée par une extension.")
+      // setDomString("Cette page ne peut pas être analysée par une extension.")
       return
     }
     const results = await getHtmlWithTab(tab)
 
     if (!results.length) {
-      setDomString("Impossible de récupérer le HTML.")
+      // setDomString("Impossible de récupérer le HTML.")
       return
     }
 
     const html = typeof results[0]?.result === "string" ? results[0].result : ""
-    setDomString(html || "Aucun HTML n'a été trouvé sur cette page.")
+    // setDomString(html || "Aucun HTML n'a été trouvé sur cette page.")
 
     const result = await sendHtml(html, tab)
 
     setResponseApi(result)
   } catch (error) {
     console.error(error)
-    setDomString("Une erreur est survenue pendant l'extraction du HTML.")
+    // setDomString("Une erreur est survenue pendant l'extraction du HTML.")
   } finally {
     setLoading(false)
   }

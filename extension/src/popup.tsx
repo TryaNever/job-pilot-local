@@ -7,6 +7,16 @@ function IndexPopup() {
   const [loading, setLoading] = useState(false)
   const [responseApi, setResponseApi] = useState({})
 
+  let socket = new WebSocket("ws://localhost:8000/ws/offers")
+
+  socket.onopen = () => {
+    setDomString("connection etablie")
+  }
+
+  socket.onmessage = (event) => {
+  setDomString((domString) => `${domString} Message reçu :, ${event.data}`);
+};
+
   return (
     <div
       style={{
@@ -33,13 +43,13 @@ function IndexPopup() {
         ajouter cette offre
       </button>
 
-      {responseApi && (
+      {domString && (
         <div style={{ marginTop: 16 }}>
           <h3>HTML de la page</h3>
 
           <textarea
             readOnly
-            value={JSON.stringify(responseApi)}
+            value={JSON.stringify(domString)}
             style={{
               width: "100%",
               height: 350,
