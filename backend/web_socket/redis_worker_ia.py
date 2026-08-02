@@ -1,14 +1,19 @@
 
 from fastapi import APIRouter, WebSocket
 
+from core.redis import get_redis_client
+from core.redis_tasks import RedisTasks
+
 
 router = APIRouter()
 
 
-@router.websocket("/ws/{client_id}")
-async def websocket_endpoint(websocket: WebSocket, client_id: str):
+@router.websocket("/ws/worker")
+async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
-    await websocket.send_text(f"Hello, Client {client_id}")
-    while True:
-        data = await websocket.receive_text()
-        await websocket.send_text(f"Message from {client_id}: {data}")
+ 
+    redis_client = get_redis_client()
+    tasks = RedisTasks(redis_client)
+    
+    data_json = await tasks.get_all_tasks()
+    await websocket.send_json(data_json)
