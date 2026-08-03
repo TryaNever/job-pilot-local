@@ -48,8 +48,12 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     ia_agent_response = ia_agent.fetch_ia(
         offer.html_clear
     )
-
-    data = json.loads(ia_agent_response)
+    try:
+        data = json.loads(ia_agent_response)
+    except json.JSONDecodeError as e:
+        print(e)
+        print(ia_agent_response)
+        raise
     
     offer.ia_response = str(ia_agent_response)
     offer.name = data["job"]["title"]
