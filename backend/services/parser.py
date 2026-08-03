@@ -2,6 +2,7 @@ from datetime import datetime
 import re
 
 class Parser:
+    @staticmethod
     def parse_date_posted(value: str | None):
         if not value:
             return None
