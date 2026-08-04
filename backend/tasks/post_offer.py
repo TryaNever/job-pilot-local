@@ -73,7 +73,16 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     offer.created_date = datetime.datetime.now()
 
     entitymanager = EntityManager()
-    entitymanager.post(offer)
+    try:
+        entitymanager.post(offer)
+    except:
+        await tasks.update_task(
+            task_id,
+            "ERROR_WRONG_DATA",
+            100,
+            status="failed"
+            )
+        return
 
     await tasks.update_task(
         task_id,
