@@ -3,7 +3,7 @@ import datetime
 
 from fastapi import APIRouter
 from core.redis import get_redis_client
-from tasks.post_offer import post_offer
+from workers.post_offer import post_offer
 from models.offers import Offer
 
 

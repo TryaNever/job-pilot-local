@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
+from sched import scheduler
 from fastapi import FastAPI
 
+from tasks.redis import Redis as RedisTasks
 from core.database import Database
 from api.post_pdf import router as pdf_router
 from api.offers import router as offers_router
@@ -12,8 +14,11 @@ from fastapi.middleware.cors import CORSMiddleware
 async def lifespan(app: FastAPI):
     database_core = Database()
     database_core.create_db_and_tables()
+    redis_tasks = RedisTasks()
+    scheduler.add_job(redis_tasks.redis_error_checker(), "interval", minutes=1)
+    scheduler.start()
     yield
-
+    scheduler.shutdown()
 
 app = FastAPI(lifespan=lifespan)
 
