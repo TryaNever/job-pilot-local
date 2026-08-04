@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
-from sched import scheduler
 from fastapi import FastAPI
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from tasks.redis import Redis as RedisTasks
 from core.database import Database
@@ -12,13 +12,25 @@ from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    database_core = Database()
-    database_core.create_db_and_tables()
-    redis_tasks = RedisTasks()
-    scheduler.add_job(redis_tasks.redis_error_checker(), "interval", minutes=1)
-    scheduler.start()
-    yield
-    scheduler.shutdown()
+    try:
+
+        redis_tasks = RedisTasks()
+        scheduler = AsyncIOScheduler()
+        scheduler.add_job(
+            redis_tasks.redis_error_checker,
+            "interval",
+            seconds=10
+        )
+        scheduler.start()
+        database_core = Database()
+        database_core.create_db_and_tables()
+        yield
+        scheduler.shutdown()
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise
 
 app = FastAPI(lifespan=lifespan)
 
