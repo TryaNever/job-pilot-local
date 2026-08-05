@@ -19,4 +19,10 @@ class Redis:
         self.logger.info("=========")
         self.logger.info(sort_tasks)
         self.logger.info("=========")
-        
+        for task in sort_tasks:
+            await tasks.update_task(
+            task_id=task["task_id"],
+            step="unknow",
+            progress=task["progress"],
+            status="failed",
+        )
