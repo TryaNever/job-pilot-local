@@ -15,7 +15,7 @@ class Redis:
         redis_client = get_redis_client()
         tasks = RedisTasks(redis_client)
         all_tasks = await tasks.get_all_tasks()
-        sort_tasks = [task for task in all_tasks if time.time() - float(task["created_at"]) > 600 ]
+        sort_tasks = [task for task in all_tasks if time.time() - float(task["created_at"]) > 600 and task["step"] != "DONE"]
         self.logger.info("=========")
         self.logger.info(sort_tasks)
         self.logger.info("=========")
