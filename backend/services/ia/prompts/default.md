@@ -133,3 +133,4 @@ Retourne uniquement un JSON valide.
 Ne mets aucun texte avant ou après.
 N'utilise pas de markdown.
 Respecte strictement la syntaxe JSON.
+Si les information ne sont pas en lien avec une offre d'emploie le return le json avec des null partout

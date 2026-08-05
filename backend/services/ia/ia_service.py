@@ -49,7 +49,7 @@ class IaService():
                 "top_k": 40,
                 "repeat_penalty": 1.1,
                 "num_predict": 2048,
-                "num_ctx": 8192,
+                "num_ctx": 16384,
             },
         }
         response = requests.post(self.URL, json=payload, timeout=240)

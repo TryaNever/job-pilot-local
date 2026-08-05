@@ -5,4 +5,4 @@ broker = ListQueueBroker(
     socket_timeout=None,
     )
 
-import tasks.post_offer
+import workers.post_offer

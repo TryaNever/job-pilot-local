@@ -48,8 +48,12 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     ia_agent_response = ia_agent.fetch_ia(
         offer.html_clear
     )
-
-    data = json.loads(ia_agent_response)
+    try:
+        data = json.loads(ia_agent_response)
+    except json.JSONDecodeError as e:
+        print(e)
+        print(ia_agent_response)
+        raise
     
     offer.ia_response = str(ia_agent_response)
     offer.name = data["job"]["title"]
@@ -69,7 +73,16 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     offer.created_date = datetime.datetime.now()
 
     entitymanager = EntityManager()
-    entitymanager.post(offer)
+    try:
+        entitymanager.post(offer)
+    except:
+        await tasks.update_task(
+            task_id,
+            "ERROR_WRONG_DATA",
+            100,
+            status="failed"
+            )
+        return
 
     await tasks.update_task(
         task_id,
