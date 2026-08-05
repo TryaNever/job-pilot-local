@@ -38,6 +38,7 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     )
 
     offer.html_clear = cleaner.to_text(clean_html)
+    offer.id_redis = ctx.message.task_id
 
     await tasks.update_task(
         task_id,
