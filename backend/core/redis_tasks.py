@@ -11,24 +11,26 @@ class RedisTasks:
         task_id,
         step,
         progress,
-        status="processing"
+        status="processing",
+        **extra_fields
     ):
+        
+        data = {
+        "status": status,
+        "step": step,
+        "progress": progress,
+        **extra_fields,
+    }
         await self.redis.hset(
             f"task:{task_id}",
-            mapping={
-                "status": status,
-                "step": step,
-                "progress": progress,
-            }
+            mapping=data
         )
 
         await self.redis.publish(
             "tasks",
             json.dumps({
             "task_id": task_id,
-            "status": status,
-            "step": step,
-            "progress": progress,
+            **data,
             })
         )
     
