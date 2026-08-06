@@ -30,7 +30,8 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     await tasks.update_task(
         task_id,
         "CLEAN_HTML",
-        10
+        10,
+        offer=offer
     )
 
     clean_html = cleaner.clean(
@@ -43,7 +44,8 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     await tasks.update_task(
         task_id,
         "IA_ANALYSIS (étape longue)",
-        50
+        50,
+        offer=offer
     )
 
     ia_agent_response = ia_agent.fetch_ia(
@@ -66,7 +68,8 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     await tasks.update_task(
         task_id,
         "SAVE_DATABASE",
-        90
+        90,
+        offer=offer
     )
 
     offer.status = StatusOffert.TO_APPLY
@@ -89,7 +92,8 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
         task_id,
         "DONE",
         100,
-        status="completed"
+        status="completed",
+        offer=offer
     )
 
     return {

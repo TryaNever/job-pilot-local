@@ -696,7 +696,7 @@
         "kind": 6,
         "importPath": "backend.core.redis_tasks",
         "description": "backend.core.redis_tasks",
-        "peekOfCode": "class RedisTasks:\n    def __init__(self, redis):\n        self.redis = redis\n    async def update_task(\n        self,\n        task_id,\n        step,\n        progress,\n        status=\"processing\"\n    ):",
+        "peekOfCode": "class RedisTasks:\n    def __init__(self, redis):\n        self.redis = redis\n    async def update_task(\n        self,\n        task_id,\n        step,\n        progress,\n        status=\"processing\",\n        **extra_fields",
         "detail": "backend.core.redis_tasks",
         "documentation": {}
     },
@@ -804,7 +804,7 @@
         "kind": 5,
         "importPath": "backend.workers.post_offer",
         "description": "backend.workers.post_offer",
-        "peekOfCode": "router = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    await tasks.update_task(\n        task_id,\n        \"CLEAN_HTML\",\n        10",
+        "peekOfCode": "router = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    await tasks.update_task(\n        task_id,\n        \"CLEAN_HTML\",\n        10,",
         "detail": "backend.workers.post_offer",
         "documentation": {}
     },
