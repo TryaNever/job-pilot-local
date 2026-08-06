@@ -17,6 +17,14 @@
         "documentation": {}
     },
     {
+        "label": "datetime",
+        "importPath": "datetime",
+        "description": "datetime",
+        "isExtraImport": true,
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
         "label": "APIRouter",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -65,6 +73,30 @@
         "documentation": {}
     },
     {
+        "label": "WebSocket",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "WebSocketDisconnect",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "APIRouter",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "FastAPI",
         "importPath": "fastapi",
         "description": "fastapi",
@@ -89,11 +121,36 @@
         "documentation": {}
     },
     {
-        "label": "post_offer",
-        "importPath": "tasks.post_offer",
-        "description": "tasks.post_offer",
+        "label": "get_redis_client",
+        "importPath": "core.redis",
+        "description": "core.redis",
         "isExtraImport": true,
-        "detail": "tasks.post_offer",
+        "detail": "core.redis",
+        "documentation": {}
+    },
+    {
+        "label": "get_redis_client",
+        "importPath": "core.redis",
+        "description": "core.redis",
+        "isExtraImport": true,
+        "detail": "core.redis",
+        "documentation": {}
+    },
+    {
+        "label": "workers.post_offer",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "workers.post_offer",
+        "description": "workers.post_offer",
+        "detail": "workers.post_offer",
+        "documentation": {}
+    },
+    {
+        "label": "post_offer",
+        "importPath": "workers.post_offer",
+        "description": "workers.post_offer",
+        "isExtraImport": true,
+        "detail": "workers.post_offer",
         "documentation": {}
     },
     {
@@ -260,6 +317,14 @@
         "documentation": {}
     },
     {
+        "label": "INTEGER",
+        "importPath": "sqlalchemy",
+        "description": "sqlalchemy",
+        "isExtraImport": true,
+        "detail": "sqlalchemy",
+        "documentation": {}
+    },
+    {
         "label": "TIMESTAMP",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
@@ -285,14 +350,6 @@
     },
     {
         "label": "Text",
-        "importPath": "sqlalchemy",
-        "description": "sqlalchemy",
-        "isExtraImport": true,
-        "detail": "sqlalchemy",
-        "documentation": {}
-    },
-    {
-        "label": "ForeignKey",
         "importPath": "sqlalchemy",
         "description": "sqlalchemy",
         "isExtraImport": true,
@@ -333,6 +390,15 @@
         "documentation": {}
     },
     {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
         "label": "BeautifulSoup",
         "importPath": "bs4",
         "description": "bs4",
@@ -358,11 +424,94 @@
         "documentation": {}
     },
     {
-        "label": "Context",
+        "label": "logging",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "logging",
+        "description": "logging",
+        "detail": "logging",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "Timestamp",
+        "importPath": "pymysql",
+        "description": "pymysql",
+        "isExtraImport": true,
+        "detail": "pymysql",
+        "documentation": {}
+    },
+    {
+        "label": "RedisTasks",
+        "importPath": "core.redis_tasks",
+        "description": "core.redis_tasks",
+        "isExtraImport": true,
+        "detail": "core.redis_tasks",
+        "documentation": {}
+    },
+    {
+        "label": "RedisTasks",
+        "importPath": "core.redis_tasks",
+        "description": "core.redis_tasks",
+        "isExtraImport": true,
+        "detail": "core.redis_tasks",
+        "documentation": {}
+    },
+    {
+        "label": "RedisTasks",
+        "importPath": "core.redis_tasks",
+        "description": "core.redis_tasks",
+        "isExtraImport": true,
+        "detail": "core.redis_tasks",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "Annotated",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "TaskiqDepends",
         "importPath": "taskiq",
         "description": "taskiq",
         "isExtraImport": true,
         "detail": "taskiq",
+        "documentation": {}
+    },
+    {
+        "label": "Context",
+        "importPath": "taskiq.context",
+        "description": "taskiq.context",
+        "isExtraImport": true,
+        "detail": "taskiq.context",
+        "documentation": {}
+    },
+    {
+        "label": "Parser",
+        "importPath": "services.parser",
+        "description": "services.parser",
+        "isExtraImport": true,
+        "detail": "services.parser",
         "documentation": {}
     },
     {
@@ -406,19 +555,27 @@
         "documentation": {}
     },
     {
-        "label": "RedisTasks",
-        "importPath": "core.redis_tasks",
-        "description": "core.redis_tasks",
-        "isExtraImport": true,
-        "detail": "core.redis_tasks",
-        "documentation": {}
-    },
-    {
         "label": "asynccontextmanager",
         "importPath": "contextlib",
         "description": "contextlib",
         "isExtraImport": true,
         "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncIOScheduler",
+        "importPath": "apscheduler.schedulers.asyncio",
+        "description": "apscheduler.schedulers.asyncio",
+        "isExtraImport": true,
+        "detail": "apscheduler.schedulers.asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "Redis",
+        "importPath": "tasks.redis",
+        "description": "tasks.redis",
+        "isExtraImport": true,
+        "detail": "tasks.redis",
         "documentation": {}
     },
     {
@@ -435,6 +592,14 @@
         "description": "api.offers",
         "isExtraImport": true,
         "detail": "api.offers",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "importPath": "web_socket.redis_worker_ia",
+        "description": "web_socket.redis_worker_ia",
+        "isExtraImport": true,
+        "detail": "web_socket.redis_worker_ia",
         "documentation": {}
     },
     {
@@ -486,7 +651,7 @@
         "kind": 5,
         "importPath": "backend.core.broker",
         "description": "backend.core.broker",
-        "peekOfCode": "broker = ListQueueBroker(\"redis://redis:6379\")",
+        "peekOfCode": "broker = ListQueueBroker(\n    \"redis://redis:6379\",\n    socket_timeout=None,\n    )\nimport workers.post_offer",
         "detail": "backend.core.broker",
         "documentation": {}
     },
@@ -549,7 +714,7 @@
         "kind": 6,
         "importPath": "backend.models.offers",
         "description": "backend.models.offers",
-        "peekOfCode": "class StatusOffert(enum.Enum):\n    TO_APPLY = \"to_apply\"\n    APPLIED = \"applied\"\n    INTERVIEW = \"interview\"\n    REJECTED = \"rejected\"\n    ACCEPTED = \"accepted\"\nclass Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int | None = Field(foreign_key=\"company.id\")",
+        "peekOfCode": "class StatusOffert(enum.Enum):\n    TO_APPLY = \"to_apply\"\n    APPLIED = \"applied\"\n    INTERVIEW = \"interview\"\n    REJECTED = \"rejected\"\n    ACCEPTED = \"accepted\"\nclass Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    id_redis: int | None = Field(sa_column=Column(INTEGER))\n    name: str = Field(index=True)",
         "detail": "backend.models.offers",
         "documentation": {}
     },
@@ -558,7 +723,7 @@
         "kind": 6,
         "importPath": "backend.models.offers",
         "description": "backend.models.offers",
-        "peekOfCode": "class Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    name: str = Field(index=True)\n    company: int | None = Field(foreign_key=\"company.id\")\n    date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))\n    status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))\n    html_brut: str = Field(sa_column=Column(LONGTEXT))\n    html_clear: str = Field(sa_column=Column(LONGTEXT))\n    ia_response: str = Field(sa_column=Column(LONGTEXT))\n    last_updated: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))",
+        "peekOfCode": "class Offer(SQLModel, table=True):\n    id: int | None = Field(default=None, primary_key=True)\n    id_redis: int | None = Field(sa_column=Column(INTEGER))\n    name: str = Field(index=True)\n    company: int | None = Field(foreign_key=\"company.id\")\n    date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))\n    status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))\n    html_brut: str = Field(sa_column=Column(LONGTEXT))\n    html_clear: str = Field(sa_column=Column(LONGTEXT))\n    ia_response: str = Field(sa_column=Column(LONGTEXT))",
         "detail": "backend.models.offers",
         "documentation": {}
     },
@@ -569,6 +734,15 @@
         "description": "backend.services.ia.ia_service",
         "peekOfCode": "class IaService():\n    PROMPTS_DIR = Path(__file__).parent / \"prompts\"\n    PROMPTS_NAME = \"default\"\n    URL = \"http://ollama:11434/api/generate\"\n    def __init__(self, prompts_name: str = \"default.md\"):\n        load_dotenv()\n        self.PROMPTS_NAME = prompts_name\n        self.model_name = os.getenv(\"MODEL_OLLAMA\", \"qwen2.5:7b\")\n    def get_systeme_prompt(self) -> str:\n        path = self.PROMPTS_DIR / f\"{self.PROMPTS_NAME}.md\"",
         "detail": "backend.services.ia.ia_service",
+        "documentation": {}
+    },
+    {
+        "label": "Parser",
+        "kind": 6,
+        "importPath": "backend.services.parser",
+        "description": "backend.services.parser",
+        "peekOfCode": "class Parser:\n    @staticmethod\n    def parse_date_posted(value: str | None):\n        if not value:\n            return None\n        value = re.sub(r\"\\s*-\\s*\\d+\\s*days?\\s*$\", \"\", value)\n        try:\n            return datetime.fromisoformat(value)\n        except ValueError:\n            return None",
+        "detail": "backend.services.parser",
         "documentation": {}
     },
     {
@@ -590,30 +764,48 @@
         "documentation": {}
     },
     {
-        "label": "cleaner",
-        "kind": 5,
-        "importPath": "backend.tasks.post_offer",
-        "description": "backend.tasks.post_offer",
-        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = IaService()\nrouter = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Context):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    print(await tasks.get_all_tasks())\n    await tasks.update_task(",
-        "detail": "backend.tasks.post_offer",
-        "documentation": {}
-    },
-    {
-        "label": "ia_agent",
-        "kind": 5,
-        "importPath": "backend.tasks.post_offer",
-        "description": "backend.tasks.post_offer",
-        "peekOfCode": "ia_agent = IaService()\nrouter = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Context):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    print(await tasks.get_all_tasks())\n    await tasks.update_task(\n        task_id,",
-        "detail": "backend.tasks.post_offer",
+        "label": "Redis",
+        "kind": 6,
+        "importPath": "backend.tasks.redis",
+        "description": "backend.tasks.redis",
+        "peekOfCode": "class Redis:\n    logging.basicConfig(level=logging.INFO)\n    logger = logging.getLogger(\"uvicorn\")\n    async def redis_error_checker(self):\n        redis_client = get_redis_client()\n        tasks = RedisTasks(redis_client)\n        all_tasks = await tasks.get_all_tasks()\n        sort_tasks = [task for task in all_tasks if time.time() - float(task[\"created_at\"]) > 600 and task[\"step\"] != \"DONE\"]\n        self.logger.info(\"=========\")\n        self.logger.info(sort_tasks)",
+        "detail": "backend.tasks.redis",
         "documentation": {}
     },
     {
         "label": "router",
         "kind": 5,
-        "importPath": "backend.tasks.post_offer",
-        "description": "backend.tasks.post_offer",
-        "peekOfCode": "router = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Context):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    print(await tasks.get_all_tasks())\n    await tasks.update_task(\n        task_id,\n        \"CLEAN_HTML\",",
-        "detail": "backend.tasks.post_offer",
+        "importPath": "backend.web_socket.redis_worker_ia",
+        "description": "backend.web_socket.redis_worker_ia",
+        "peekOfCode": "router = APIRouter()\n@router.websocket(\"/ws/worker\")\nasync def websocket_endpoint(websocket: WebSocket):\n    try:\n        await websocket.accept()\n        print(\"start ws\")\n        redis_client = get_redis_client()\n        tasks = RedisTasks(redis_client)\n        await websocket.send_json(await tasks.get_all_tasks())\n        pubsub = redis_client.pubsub()",
+        "detail": "backend.web_socket.redis_worker_ia",
+        "documentation": {}
+    },
+    {
+        "label": "cleaner",
+        "kind": 5,
+        "importPath": "backend.workers.post_offer",
+        "description": "backend.workers.post_offer",
+        "peekOfCode": "cleaner = SoupCleaner()\nia_agent = IaService()\nrouter = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    await tasks.update_task(\n        task_id,",
+        "detail": "backend.workers.post_offer",
+        "documentation": {}
+    },
+    {
+        "label": "ia_agent",
+        "kind": 5,
+        "importPath": "backend.workers.post_offer",
+        "description": "backend.workers.post_offer",
+        "peekOfCode": "ia_agent = IaService()\nrouter = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    await tasks.update_task(\n        task_id,\n        \"CLEAN_HTML\",",
+        "detail": "backend.workers.post_offer",
+        "documentation": {}
+    },
+    {
+        "label": "router",
+        "kind": 5,
+        "importPath": "backend.workers.post_offer",
+        "description": "backend.workers.post_offer",
+        "peekOfCode": "router = APIRouter()\n@broker.task\nasync def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):\n    task_id = ctx.message.task_id\n    redis_client = get_redis_client()\n    tasks = RedisTasks(redis_client)\n    await tasks.update_task(\n        task_id,\n        \"CLEAN_HTML\",\n        10",
+        "detail": "backend.workers.post_offer",
         "documentation": {}
     },
     {
