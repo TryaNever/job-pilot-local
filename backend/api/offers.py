@@ -22,6 +22,7 @@ async def new_offer(offer: Offer):
     mapping={
         "status": "QUEUED",
         "progress": 0,
-        "created_at": datetime.datetime.now().timestamp()
+        "created_at": datetime.datetime.now().timestamp(),
+        "html_brut": offer.html_brut
     })
     return {"message": "tasks send to redis todo set webhook to get advence info"}
