@@ -15,8 +15,8 @@ class StatusOffert(enum.Enum):
     
 class Offer(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
-    id_redis: int | None = Field(sa_column=Column(INTEGER))
-    name: str = Field(index=True)
+    id_redis: int | None = Field(sa_column=Column(Text))
+    name: str | None = Field(index=True)
     company: int | None = Field(foreign_key="company.id")
     date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))
     status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))
