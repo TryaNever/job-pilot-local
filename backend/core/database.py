@@ -1,4 +1,3 @@
-from encodings import undefined
 import os
 from dotenv import load_dotenv
 from sqlmodel import SQLModel, Session, create_engine
@@ -35,6 +34,10 @@ class EntityManager(Database):
         self.session.commit()
 
         self.session.close()
+        
+    def get_by_id(self, model, id):
+        return self.session.get(model, id)
+        
         
     def continious_post(self, model):
         self.session.add(model)
