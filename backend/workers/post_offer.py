@@ -28,7 +28,7 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     redis_client = get_redis_client()
     tasks = RedisTasks(redis_client)
     
-    id_offer = entitymanager.getId(offer)
+    id_offer = entitymanager.get_id(offer)
 
     await tasks.update_task(
         task_id,
@@ -43,6 +43,8 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
 
     offer.html_clear = cleaner.to_text(clean_html)
     offer.id_redis = ctx.message.task_id
+
+    entitymanager.continious_post
 
     await tasks.update_task(
         task_id,
