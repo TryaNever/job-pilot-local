@@ -54,4 +54,7 @@ class RedisTasks:
             tasks.append(task)
 
         tasks.sort(key=lambda t: float(t["created_at"]))
-        return tasks
+        
+        sort_tasks = [task for task in tasks if task["status"] != "COMPLETED"]
+        
+        return sort_tasks
