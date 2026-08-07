@@ -53,7 +53,7 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
         task_id,
         "IA_ANALYSIS (étape longue)",
         50,
-        offer=offer
+        id_offer=id_offer
     )
 
     ia_agent_response = ia_agent.fetch_ia(
@@ -79,7 +79,7 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
         task_id,
         "SAVE_DATABASE",
         90,
-        offer=offer
+        id_offer=id_offer
     )
 
     offer.status = StatusOffert.TO_APPLY
@@ -102,7 +102,7 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
         "DONE",
         100,
         status="completed",
-        offer=offer
+        id_offer=id_offer
     )
 
     return {
