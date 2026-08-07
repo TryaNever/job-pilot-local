@@ -24,6 +24,9 @@ router = APIRouter()
 async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     task_id = ctx.message.task_id
     entitymanager = EntityManager()
+    
+    offer.status = StatusOffert.TO_APPLY
+    entitymanager.continious_post(offer)
 
     redis_client = get_redis_client()
     tasks = RedisTasks(redis_client)
@@ -44,7 +47,7 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     offer.html_clear = cleaner.to_text(clean_html)
     offer.id_redis = ctx.message.task_id
 
-    entitymanager.continious_post
+    entitymanager.continious_post(offer)
 
     await tasks.update_task(
         task_id,
@@ -69,6 +72,8 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     
     parser = Parser()
     offer.date_posted = parser.parse_date_posted(data["job"]["publication_date"])
+    
+    entitymanager.continious_post(offer)
 
     await tasks.update_task(
         task_id,

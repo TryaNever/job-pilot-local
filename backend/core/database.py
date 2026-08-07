@@ -44,6 +44,4 @@ class EntityManager(Database):
         self.session.close()
         
     def get_id(self, model):
-        self.session.add(model)
-        self.session.flush()
         return model.id
