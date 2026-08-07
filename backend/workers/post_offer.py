@@ -41,7 +41,8 @@ async def post_offer(offer: Offer,task_id: None, ctx: Annotated[Context, TaskiqD
             task_id,
             "CLEAN_HTML",
             10,
-            id_offer=id_offer
+            id_offer=id_offer,
+            status="RUNNING"
         )
 
         clean_html = cleaner.clean(
@@ -58,7 +59,8 @@ async def post_offer(offer: Offer,task_id: None, ctx: Annotated[Context, TaskiqD
             task_id,
             "IA_ANALYSIS (étape longue)",
             50,
-            id_offer=id_offer
+            id_offer=id_offer,
+            status="RUNNING"
         )
 
         ia_agent_response = ia_agent.fetch_ia(
@@ -84,7 +86,8 @@ async def post_offer(offer: Offer,task_id: None, ctx: Annotated[Context, TaskiqD
             task_id,
             "SAVE_DATABASE",
             90,
-            id_offer=id_offer
+            id_offer=id_offer,
+            status="RUNNING"
         )
 
         offer.last_updated = datetime.datetime.now()
@@ -97,7 +100,7 @@ async def post_offer(offer: Offer,task_id: None, ctx: Annotated[Context, TaskiqD
                 task_id,
                 "ERROR_WRONG_DATA",
                 100,
-                status="failed"
+                status="FAILED"
                 )
             return
 
@@ -105,11 +108,11 @@ async def post_offer(offer: Offer,task_id: None, ctx: Annotated[Context, TaskiqD
             task_id,
             "DONE",
             100,
-            status="completed",
+            status="COMPLETED",
             id_offer=id_offer
         )
 
     return {
-        "status": "done",
+        "status": "DONE",
         "data": data
     }
