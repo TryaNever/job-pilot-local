@@ -19,11 +19,12 @@ async def lifespan(app: FastAPI):
         scheduler.add_job(
             redis_tasks.redis_error_checker,
             "interval",
-            seconds=10
+            seconds=600
         )
         scheduler.start()
         database_core = Database()
         database_core.create_db_and_tables()
+        redis_tasks.redis_tasks_restart()
         yield
         scheduler.shutdown()
 
