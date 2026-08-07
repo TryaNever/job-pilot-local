@@ -23,15 +23,18 @@ router = APIRouter()
 @broker.task
 async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     task_id = ctx.message.task_id
+    entitymanager = EntityManager()
 
     redis_client = get_redis_client()
     tasks = RedisTasks(redis_client)
+    
+    id_offer = entitymanager.getId(offer)
 
     await tasks.update_task(
         task_id,
         "CLEAN_HTML",
         10,
-        offer=offer
+        id_offer=id_offer
     )
 
     clean_html = cleaner.clean(
@@ -76,7 +79,6 @@ async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
     offer.last_updated = datetime.datetime.now()
     offer.created_date = datetime.datetime.now()
 
-    entitymanager = EntityManager()
     try:
         entitymanager.post(offer)
     except:
