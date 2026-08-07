@@ -35,3 +35,15 @@ class EntityManager(Database):
         self.session.commit()
 
         self.session.close()
+        
+    def continiousPost(self, model):
+        self.session.add(model)
+        self.session.commit()
+
+    def close(self):
+        self.session.close()
+        
+    def getId(self, model):
+        self.session.add(model)
+        self.session.flush()
+        return model.id
