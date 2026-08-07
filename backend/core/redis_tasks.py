@@ -44,3 +44,14 @@ class RedisTasks:
 
         tasks.sort(key=lambda t: float(t["created_at"]))
         return tasks
+    
+    async def get_runnig_tasks(self):
+        tasks = []
+
+        async for key in self.redis.scan_iter("task:*"):
+            task = await self.redis.hgetall(key)
+            task["task_id"] = key.split(":")[1]
+            tasks.append(task)
+
+        tasks.sort(key=lambda t: float(t["created_at"]))
+        return tasks
