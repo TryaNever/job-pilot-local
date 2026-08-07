@@ -1,3 +1,4 @@
+from asyncio import all_tasks
 import logging
 import time
 
@@ -28,3 +29,7 @@ class Redis:
             progress=task["progress"],
             status="failed",
         )
+
+    async def redis_tasks_restart(self):
+        all_tasks = await self.tasks.get_all_tasks()
+        
