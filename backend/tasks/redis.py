@@ -1,9 +1,9 @@
 from asyncio import all_tasks
 import logging
 import time
-
-from pymysql import Timestamp
-
+from workers import post_offer
+from models.offers import Offer
+from core.database import EntityManager
 from core.redis import get_redis_client
 from core.redis_tasks import RedisTasks
 
@@ -15,6 +15,7 @@ class Redis:
     def __init__(self):
         redis_client = get_redis_client()
         self.tasks = RedisTasks(redis_client)
+        self.entitymanager = EntityManager()
         
     async def redis_error_checker(self):
         all_tasks = await self.tasks.get_all_tasks()
@@ -31,5 +32,11 @@ class Redis:
         )
 
     async def redis_tasks_restart(self):
-        all_tasks = await self.tasks.get_all_tasks()
+        running_tasks = await self.tasks.get_runnig_tasks()
+        
+        for task in running_tasks:
+            offer = self.entitymanager.get_by_id(Offer,task['id_offer'])
+            if offer:
+                await post_offer.kiq(offer)
+        
         
