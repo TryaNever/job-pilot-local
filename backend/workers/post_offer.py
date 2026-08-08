@@ -30,24 +30,12 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
     redis_client = get_redis_client()
     tasks = RedisTasks(redis_client)
     
-    id_offer = entitymanager.get_id(offer)
-
     if offer.html_clear is None:
-        if offer.html_brut is None:
-            await tasks.update_task(
-                task_id,
-                "ERROR_MISSING_HTML",
-                100,
-                id_offer=id_offer,
-                status="FAILED"
-            )
-            raise ValueError("offer.html_brut must not be None")
 
         await tasks.update_task(
             task_id,
             "CLEAN_HTML",
             10,
-            id_offer=id_offer,
             status="RUNNING"
         )
 
@@ -65,7 +53,6 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
             task_id,
             "IA_ANALYSIS (étape longue)",
             50,
-            id_offer=id_offer,
             status="RUNNING"
         )
 
@@ -92,7 +79,6 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
             task_id,
             "SAVE_DATABASE",
             90,
-            id_offer=id_offer,
             status="RUNNING"
         )
 
@@ -115,7 +101,6 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
             "DONE",
             100,
             status="COMPLETED",
-            id_offer=id_offer
         )
 
     return {
