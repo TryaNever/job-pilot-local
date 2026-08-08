@@ -1,7 +1,6 @@
-
 import datetime
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from core.database import EntityManager
 from core.redis import get_redis_client
 from workers.post_offer import post_offer
@@ -13,6 +12,12 @@ router = APIRouter()
 
 @router.post("/upload/offers")
 async def new_offer(offer: Offer):
+    if offer.html_brut is None:
+        raise HTTPException(
+            status_code=400,
+            detail="html_brut must be provided and cannot be null",
+        )
+
     redis = get_redis_client()
     
     entitymanager = EntityManager()
