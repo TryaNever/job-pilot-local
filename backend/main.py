@@ -12,8 +12,9 @@ from fastapi.middleware.cors import CORSMiddleware
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    try:
+    scheduler = None
 
+    try:
         redis_tasks = RedisTasks()
         scheduler = AsyncIOScheduler()
         scheduler.add_job(
@@ -24,14 +25,15 @@ async def lifespan(app: FastAPI):
         scheduler.start()
         database_core = Database()
         database_core.create_db_and_tables()
-        redis_tasks.redis_tasks_restart()
+        await redis_tasks.redis_tasks_restart()
         yield
-        scheduler.shutdown()
-
     except Exception as e:
         import traceback
         traceback.print_exc()
         raise
+    finally:
+        if scheduler is not None:
+            scheduler.shutdown()
 
 app = FastAPI(lifespan=lifespan)
 
