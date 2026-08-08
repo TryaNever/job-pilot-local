@@ -1,7 +1,7 @@
 from asyncio import all_tasks
 import logging
 import time
-from workers import post_offer
+from workers.post_offer import post_offer
 from models.offers import Offer
 from core.database import EntityManager
 from core.redis import get_redis_client
@@ -37,6 +37,4 @@ class Redis:
         for task in running_tasks:
             offer = self.entitymanager.get_by_id(Offer,task['id_offer'])
             if offer:
-                await post_offer.kiq(offer)
-        
-        
+                await post_offer.kiq(offer, task["task_id"])
