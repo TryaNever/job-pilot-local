@@ -1,6 +1,7 @@
 from asyncio import all_tasks
 import logging
 import time
+
 from workers.post_offer import post_offer
 from models.offers import Offer
 from core.database import EntityManager
@@ -20,9 +21,6 @@ class Redis:
     async def redis_error_checker(self):
         all_tasks = await self.tasks.get_all_tasks()
         sort_tasks = [task for task in all_tasks if time.time() - float(task["created_at"]) > 600 and task["step"] != "COMPLETED"]
-        self.logger.info("=========")
-        self.logger.info(sort_tasks)
-        self.logger.info("=========")
         for task in sort_tasks:
             await self.tasks.update_task(
             task_id=task["task_id"],
@@ -33,16 +31,20 @@ class Redis:
 
     async def redis_tasks_restart(self):
         running_tasks = await self.tasks.get_runnig_tasks()
-        
+
         for task in running_tasks:
-            offer = self.entitymanager.get_by_id(Offer,task['id_offer'])
-            
-            print("RESTART") 
-            print("id_offer =", task["id_offer"]) 
-            print("offer =", offer) 
-            print("html_brut =", repr(offer.html_brut)) 
-            print("html_clear =", repr(offer.html_clear))
-            
-            
-            if offer:
-                await post_offer.kiq(offer, task_id=task["task_id"])
+            try:
+                offer = self.entitymanager.get_by_id(
+                    Offer,
+                    task["id_offer"]
+                )
+                if offer:
+                    await post_offer.kiq(
+                        offer,
+                        task_id=task["task_id"]
+                    )
+            except Exception:
+                self.logger.exception(
+                    "Error while restarting task %s",
+                    task.get("task_id")
+                )
