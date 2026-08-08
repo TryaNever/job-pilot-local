@@ -33,6 +33,16 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
     id_offer = entitymanager.get_id(offer)
 
     if offer.html_clear is None:
+        if offer.html_brut is None:
+            await tasks.update_task(
+                task_id,
+                "ERROR_MISSING_HTML",
+                100,
+                id_offer=id_offer,
+                status="FAILED"
+            )
+            raise ValueError("offer.html_brut must not be None")
+
         await tasks.update_task(
             task_id,
             "CLEAN_HTML",
