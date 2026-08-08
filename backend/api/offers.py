@@ -36,6 +36,7 @@ async def new_offer(offer: Offer):
     f"task:{task_id}",
     mapping={
         "status": "QUEUED",
+        "step": "ADDED_QUEUE",
         "progress": 0,
         "created_at": datetime.datetime.now().timestamp(),
         "html_brut": offer.html_brut,
