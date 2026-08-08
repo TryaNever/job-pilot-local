@@ -36,5 +36,13 @@ class Redis:
         
         for task in running_tasks:
             offer = self.entitymanager.get_by_id(Offer,task['id_offer'])
+            
+            print("RESTART") 
+            print("id_offer =", task["id_offer"]) 
+            print("offer =", offer) 
+            print("html_brut =", repr(offer.html_brut)) 
+            print("html_clear =", repr(offer.html_clear))
+            
+            
             if offer:
-                await post_offer.kiq(offer, task["task_id"])
+                await post_offer.kiq(offer, task_id=task["task_id"])
