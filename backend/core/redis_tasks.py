@@ -21,6 +21,12 @@ class RedisTasks:
         "progress": progress,
         **extra_fields,
     }
+        for key, value in data.items():
+            if value is None:
+                raise ValueError(
+                    f"RedisTasks.update_task: mapping value for '{key}' is None"
+                )
+
         await self.redis.hset(
             f"task:{task_id}",
             mapping=data
