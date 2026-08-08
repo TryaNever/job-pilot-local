@@ -21,7 +21,7 @@ ia_agent = IaService()
 router = APIRouter()
 
 @broker.task
-async def post_offer(offer: Offer,task_id: None, ctx: Annotated[Context, TaskiqDepends()]):
+async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], task_id: None | str = None):
     if task_id is None:
         task_id = ctx.message.task_id
         
@@ -29,10 +29,6 @@ async def post_offer(offer: Offer,task_id: None, ctx: Annotated[Context, TaskiqD
     
     redis_client = get_redis_client()
     tasks = RedisTasks(redis_client)
-    
-    if offer.status is None:
-        offer.status = StatusOffert.TO_APPLY
-        entitymanager.continious_post(offer)
     
     id_offer = entitymanager.get_id(offer)
 
