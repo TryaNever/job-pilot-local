@@ -19,7 +19,7 @@ class Offer(SQLModel, table=True):
     name: str | None = Field(index=True)
     company: int | None = Field(foreign_key="company.id")
     date_posted: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))
-    status: str | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))
+    status: StatusOffert | None = Field(default=None, sa_column=Column(Enum(StatusOffert, native_enum=False)))
     html_brut: str | None = Field(sa_column=Column(LONGTEXT))
     html_clear: str | None = Field(sa_column=Column(LONGTEXT))
     ia_response: str | None = Field(sa_column=Column(LONGTEXT))
