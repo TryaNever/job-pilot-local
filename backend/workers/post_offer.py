@@ -46,7 +46,7 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
         offer.html_clear = cleaner.to_text(clean_html)
         offer.id_redis = task_id
 
-        entitymanager.continious_post(offer)
+        entitymanager.continious_upsert(offer)
 
     if offer.ia_response is None:
         await tasks.update_task(
@@ -73,7 +73,7 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
         parser = Parser()
         offer.date_posted = parser.parse_date_posted(data["job"]["publication_date"])
         
-        entitymanager.continious_post(offer)
+        entitymanager.continious_upsert(offer)
     if offer.created_date is None:
         await tasks.update_task(
             task_id,
