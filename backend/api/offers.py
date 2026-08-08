@@ -24,7 +24,8 @@ async def new_offer(offer: Offer):
     
     if offer.status is None:
         offer.status = StatusOffert.TO_APPLY
-        entitymanager.continious_post(offer)
+        offer.created_at = datetime.datetime.now()
+        entitymanager.continious_upsert(offer)
     task_result = await post_offer.kiq(offer)
     
     id_offer = entitymanager.get_id(offer)
