@@ -21,78 +21,89 @@ ia_agent = IaService()
 router = APIRouter()
 
 @broker.task
-async def post_offer(offer: Offer, ctx: Annotated[Context, TaskiqDepends()]):
-    task_id = ctx.message.task_id
-
+async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], task_id: None | str = None):
+    if task_id is None:
+        task_id = ctx.message.task_id
+        
+    entitymanager = EntityManager()
+    
     redis_client = get_redis_client()
     tasks = RedisTasks(redis_client)
-
-    await tasks.update_task(
-        task_id,
-        "CLEAN_HTML",
-        10
-    )
-
-    clean_html = cleaner.clean(
-        offer.html_brut
-    )
-
-    offer.html_clear = cleaner.to_text(clean_html)
-    offer.id_redis = ctx.message.task_id
-
-    await tasks.update_task(
-        task_id,
-        "IA_ANALYSIS (étape longue)",
-        50
-    )
-
-    ia_agent_response = ia_agent.fetch_ia(
-        offer.html_clear
-    )
-    try:
-        data = json.loads(ia_agent_response)
-    except json.JSONDecodeError as e:
-        print(e)
-        print(ia_agent_response)
-        raise
     
-    offer.ia_response = str(ia_agent_response)
-    offer.name = data["job"]["title"]
-    offer.company = None  # data["job"]["company"]
-    
-    parser = Parser()
-    offer.date_posted = parser.parse_date_posted(data["job"]["publication_date"])
+    if offer.html_clear is None:
 
-    await tasks.update_task(
-        task_id,
-        "SAVE_DATABASE",
-        90
-    )
-
-    offer.status = StatusOffert.TO_APPLY
-    offer.last_updated = datetime.datetime.now()
-    offer.created_date = datetime.datetime.now()
-
-    entitymanager = EntityManager()
-    try:
-        entitymanager.post(offer)
-    except:
         await tasks.update_task(
             task_id,
-            "ERROR_WRONG_DATA",
-            100,
-            status="failed"
-            )
-        return
+            "CLEAN_HTML",
+            10,
+            status="RUNNING"
+        )
 
-    await tasks.update_task(
-        task_id,
-        "DONE",
-        100,
-        status="completed"
-    )
+        clean_html = cleaner.clean(
+            offer.html_brut
+        )
+
+        offer.html_clear = cleaner.to_text(clean_html)
+        offer.id_redis = str(task_id)
+
+        entitymanager.continious_upsert(offer)
+
+    if offer.ia_response is None:
+        await tasks.update_task(
+            task_id,
+            "IA_ANALYSIS (étape longue)",
+            50,
+            status="RUNNING"
+        )
+
+        ia_agent_response = ia_agent.fetch_ia(
+            offer.html_clear
+        )
+        try:
+            data = json.loads(ia_agent_response)
+        except json.JSONDecodeError as e:
+            print(e)
+            print(ia_agent_response)
+            raise
+        
+        offer.ia_response = str(ia_agent_response)
+        offer.name = data["job"]["title"]
+        offer.company = None  # data["job"]["company"]
+        
+        parser = Parser()
+        offer.date_posted = parser.parse_date_posted(data["job"]["publication_date"])
+        
+        entitymanager.continious_upsert(offer)
+    if offer.last_updated is None:
+        await tasks.update_task(
+            task_id,
+            "SAVE_DATABASE",
+            90,
+            status="RUNNING"
+        )
+
+        offer.last_updated = datetime.datetime.now()
+        offer.created_at = datetime.datetime.now()
+
+        try:
+            entitymanager.continious_upsert(offer)
+        except:
+            await tasks.update_task(
+                task_id,
+                "ERROR_WRONG_DATA",
+                100,
+                status="FAILED"
+                )
+            return
+
+        await tasks.update_task(
+            task_id,
+            "DONE",
+            100,
+            status="COMPLETED",
+        )
 
     return {
-        "status": "done",
+        "status": "DONE",
         "data": data
     }
