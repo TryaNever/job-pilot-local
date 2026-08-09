@@ -44,7 +44,7 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
         )
 
         offer.html_clear = cleaner.to_text(clean_html)
-        offer.id_redis = task_id
+        offer.id_redis = str(task_id)
 
         entitymanager.continious_upsert(offer)
 
@@ -86,7 +86,7 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
         offer.created_at = datetime.datetime.now()
 
         try:
-            entitymanager.post(offer)
+            entitymanager.continious_upsert(offer)
         except:
             await tasks.update_task(
                 task_id,
