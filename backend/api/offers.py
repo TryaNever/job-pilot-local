@@ -24,7 +24,7 @@ async def new_offer(offer: Offer):
     
     if offer.status is None:
         offer.status = StatusOffert.TO_APPLY
-        offer.created_at = datetime.datetime.now()
+        offer.created_date = datetime.datetime.now()
         entitymanager.continious_upsert(offer)
     task_result = await post_offer.kiq(offer)
     
@@ -39,7 +39,7 @@ async def new_offer(offer: Offer):
         "status": "QUEUED",
         "step": "ADDED_QUEUE",
         "progress": 0,
-        "created_at": datetime.datetime.now().timestamp(),
+        "created_date": datetime.datetime.now().timestamp(),
         "html_brut": offer.html_brut,
         "id_offer": id_offer
     })
