@@ -7,11 +7,11 @@ from models.company import Company
 
 
 class StatusOffert(enum.Enum):
-    TO_APPLY = "to_apply"
-    APPLIED = "applied"
-    INTERVIEW = "interview"
-    REJECTED = "rejected"
-    ACCEPTED = "accepted"
+    TO_APPLY = "TO_APPLY"
+    APPLIED = "APPLIED"
+    INTERVIEW = "INTERVIEW"
+    REJECTED = "REJECTED"
+    ACCEPTED = "ACCEPTED"
     
 class Offer(SQLModel, table=True):
     id: int | None = Field(default=None, primary_key=True)
