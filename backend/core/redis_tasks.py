@@ -48,7 +48,7 @@ class RedisTasks:
             task["task_id"] = key.split(":")[1]
             tasks.append(task)
 
-        tasks.sort(key=lambda t: float(t["created_date"]))
+        tasks.sort(key=lambda t: float(t["created_at"]))
         return tasks
     
     async def get_runnig_tasks(self):
@@ -59,7 +59,7 @@ class RedisTasks:
             task["task_id"] = key.split(":")[1]
             tasks.append(task)
 
-        tasks.sort(key=lambda t: float(t["created_date"]))
+        tasks.sort(key=lambda t: float(t["created_at"]))
         
         sort_tasks = [task for task in tasks if task["status"] != "COMPLETED"]
         

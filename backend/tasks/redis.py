@@ -20,7 +20,7 @@ class Redis:
         
     async def redis_error_checker(self):
         all_tasks = await self.tasks.get_all_tasks()
-        sort_tasks = [task for task in all_tasks if time.time() - float(task["created_date"]) > 600 and task["step"] != "COMPLETED"]
+        sort_tasks = [task for task in all_tasks if time.time() - float(task["created_at"]) > 600 and task["step"] != "COMPLETED"]
         for task in sort_tasks:
             await self.tasks.update_task(
             task_id=task["task_id"],

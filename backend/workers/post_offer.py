@@ -74,7 +74,7 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
         offer.date_posted = parser.parse_date_posted(data["job"]["publication_date"])
         
         entitymanager.continious_upsert(offer)
-    if offer.created_date is None:
+    if offer.created_at is None:
         await tasks.update_task(
             task_id,
             "SAVE_DATABASE",
@@ -83,7 +83,7 @@ async def post_offer(offer: Offer , ctx: Annotated[Context, TaskiqDepends()], ta
         )
 
         offer.last_updated = datetime.datetime.now()
-        offer.created_date = datetime.datetime.now()
+        offer.created_at = datetime.datetime.now()
 
         try:
             entitymanager.post(offer)

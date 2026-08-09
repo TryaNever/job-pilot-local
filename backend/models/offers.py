@@ -24,7 +24,7 @@ class Offer(SQLModel, table=True):
     html_clear: str | None = Field(sa_column=Column(LONGTEXT))
     ia_response: str | None = Field(sa_column=Column(LONGTEXT))
     last_updated: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))
-    created_date: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))
+    created_at: datetime | None = Field(default=None, sa_column=Column(TIMESTAMP(timezone=True)))
     url_cv: str | None = Field(sa_column=Column(Text))
     url_lettre: str | None = Field(sa_column=Column(Text))
     url_offers: str | None = Field(sa_column=Column(Text))
