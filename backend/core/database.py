@@ -36,6 +36,12 @@ class EntityManager(Database):
         self.session.commit()
 
         self.session.close()
+    
+    def post_get(self, model):
+        self.session.add(model)
+        self.session.commit()
+        self.session.refresh(model)
+        return model
         
     def get_by_id(self, model, id):
         return self.session.get(model, id)
