@@ -32,7 +32,7 @@ function IndexPopup() {
         console.log(data)
 
         const sorted = [...data].sort(
-          (a, b) => Number(b.created_at) - Number(a.created_at)
+          (a, b) => Number(b.created_date) - Number(a.created_date)
         )
 
         console.log(sorted)
@@ -103,7 +103,7 @@ function IndexPopup() {
                 </div>
 
                 <p className="mt-1 text-xs text-gray-400">
-                  {new Date(Number(job.created_at) * 1000).toLocaleString()}
+                  {new Date(Number(job.created_date) * 1000).toLocaleString()}
                 </p>
               </div>
 
