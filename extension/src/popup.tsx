@@ -10,15 +10,15 @@ function IndexPopup() {
 
   const statusColor = {
     QUEUED: "bg-gray-100 text-gray-700",
-    processing: "bg-blue-100 text-blue-700",
-    completed: "bg-green-100 text-green-700",
-    failed: "bg-red-100 text-red-700"
+    RUNNING: "bg-blue-100 text-blue-700",
+    COMPLETED: "bg-green-100 text-green-700",
+    FAILED: "bg-red-100 text-red-700"
   }
 
   useEffect(() => {
     console.log("Connexion WebSocket établie 1")
 
-    const socket = new WebSocket("ws://localhost:8000/ws/worker")
+    const socket = new WebSocket("ws://127.0.0.1:8000/ws/worker")
     console.log(socket)
 
     socket.onopen = () => {
@@ -116,9 +116,9 @@ function IndexPopup() {
                 <div className="h-2 rounded-full bg-gray-200">
                   <div
                     className={`h-full rounded-full transition-all duration-300 ${
-                      job.status === "completed"
+                      job.status === "COMPLETED"
                         ? "bg-green-500"
-                        : job.status === "processing"
+                        : job.status === "RUNNING"
                           ? "bg-blue-500"
                           : "bg-gray-400"
                     }`}
