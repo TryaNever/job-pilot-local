@@ -26,7 +26,7 @@ class Redis:
             task_id=task["task_id"],
             step="unknow",
             progress=task["progress"],
-            status="failed",
+            status="FAILED",
         )
 
     async def redis_tasks_restart(self):
