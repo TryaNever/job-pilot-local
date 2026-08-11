@@ -28,7 +28,7 @@ export async function isSupportedUrl(url?: string) {
 }
 
 export async function sendHtml(domString, tab) {
-  const response = await fetch("http://localhost:8000/upload/offers", {
+  const response = await fetch("http://127.0.0.1:8000/upload/offers", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

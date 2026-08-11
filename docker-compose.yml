@@ -92,6 +92,8 @@ services:
             - driver: nvidia
               count: all 
               capabilities: [gpu]
+        limits:
+          cpus: "2"
   redis:
     image: redis:7-alpine
     restart: unless-stopped
@@ -109,7 +111,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev
-    command: taskiq worker core.broker:broker tasks
+    command: taskiq worker --workers 4 core.broker:broker tasks
     restart: unless-stopped
     depends_on:
       redis:

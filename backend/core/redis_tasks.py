@@ -1,4 +1,6 @@
+import datetime
 import json
+import time
 
 
 class RedisTasks:
@@ -20,6 +22,7 @@ class RedisTasks:
         "step": step,
         "progress": progress,
         **extra_fields,
+        "updated_at": time.time()
     }
         for key, value in data.items():
             if value is None:
