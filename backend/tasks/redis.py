@@ -32,9 +32,9 @@ class Redis:
             )
             await self.tasks.update_task(
                 task_id=task["task_id"],
-                step="unknow",
+                step="ADDED_QUEUE",
                 progress=task["progress"],
-                status="FAILED",
+                status="QUEUED",
             )
 
     async def redis_tasks_restart(self):
