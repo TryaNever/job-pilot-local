@@ -52,7 +52,7 @@ class IaService():
                 "num_ctx": 16384,
             },
         }
-        response = requests.post(self.URL, json=payload, timeout=240)
+        response = requests.post(self.URL, json=payload, timeout=2400)
         try:
             response.raise_for_status()
         except requests.HTTPError as exc:
