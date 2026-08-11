@@ -20,14 +20,22 @@ class Redis:
         
     async def redis_error_checker(self):
         all_tasks = await self.tasks.get_all_tasks()
-        sort_tasks = [task for task in all_tasks if time.time() - float(task["created_at"]) > 600 and task["step"] != "COMPLETED"]
+        sort_tasks = [task for task in all_tasks if time.time() - float(task["updated_at"]) > 600 and task["step"] != "COMPLETED"]
         for task in sort_tasks:
+            offer = self.entitymanager.get_by_id(
+                Offer,
+                task["id_offer"]
+            )
+            await post_offer.kiq(
+                offer,
+                task_id=task["task_id"]
+            )
             await self.tasks.update_task(
-            task_id=task["task_id"],
-            step="unknow",
-            progress=task["progress"],
-            status="FAILED",
-        )
+                task_id=task["task_id"],
+                step="unknow",
+                progress=task["progress"],
+                status="FAILED",
+            )
 
     async def redis_tasks_restart(self):
         running_tasks = await self.tasks.get_runnig_tasks()
